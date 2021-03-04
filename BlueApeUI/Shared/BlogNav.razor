@@ -1,4 +1,6 @@
-﻿<div class="topBar">
+﻿@inject NavigationManager _navMan
+
+<div class="topBar">
     <div class="leftSide">
         <div class="logo">
             <img src=@model.logoUrl height=@(scale*35) />
@@ -6,7 +8,9 @@
         @for (int j = 0; j < model.pages.Count() && j <= 7; j++)
         {
             <div class="pageLink">
-                @model.pages[j]
+                <a href=@($"/page-editor/{model.title}/{model.pages[j]}")>
+                    @model.pages[j]
+                </a>
             </div>
         }
     </div>
@@ -49,6 +53,7 @@
         .title {
             display: none !important;
         }
+
         .categoryContainer {
             top: 0 !important;
         }
@@ -160,10 +165,14 @@
         background: rgb(168,168,168);
         background: @model.secondaryColor;
     }
-        .iconBox > img {
-            left: @(Convert.ToString(scale * 5)+"px");
-            position: absolute;
-        }
+    .iconBox > img {
+       left: @(Convert.ToString(scale * 5)+"px");
+        position: absolute;
+    }
+    a, a:hover {
+        color: white;
+        text-decoration: none;
+    }
 </style>
 
 @code {
@@ -175,4 +184,11 @@
     public bool activeButtons { get; set; }
     [Parameter]
     public bool showTitle { get; set; }
+
+    protected void NavigateToPage(string pageName)
+    {
+        if (activeButtons)
+            _navMan.NavigateTo($"/page-editor/{model.title}/{pageName}");
+        else return;
+    }
 }

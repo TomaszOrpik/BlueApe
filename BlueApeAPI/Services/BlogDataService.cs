@@ -71,6 +71,14 @@ namespace BlueApeAPI.Services
                 .BlogDocument.Posts;
             return posts.Where(p => p.Title == postName).FirstOrDefault();
         }
+        // get specific page
+        public PageData GetPage(string blogName, string pageName)
+        {
+            PageData[] pages = _database.GetCollection<BlogGetData>(blogName)
+                .Find(data => true).FirstOrDefault()
+                .BlogDocument.Pages;
+            return pages.Where(p => p.Title == pageName).FirstOrDefault();
+        }
         // add new post
         public void AddPost(string blogName, PageData post)
         {
@@ -99,6 +107,18 @@ namespace BlueApeAPI.Services
             List<PageData> listPosts = document.Posts.ToList();
             listPosts.Remove(post);
             document.Posts = listPosts.ToArray();
+            var update = Builders<BlogData>.Update.Set("BlogDocument", document);
+            _database.GetCollection<BlogData>(blogName).UpdateOne(data => true, update);
+        }
+        // delete page
+        public void DeletePage(string blogName, string pageName)
+        {
+            BlogDocument document = _database.GetCollection<BlogGetData>(blogName)
+                .Find(data => true).FirstOrDefault().BlogDocument;
+            PageData page = document.Pages.Where(p => p.Title == pageName).FirstOrDefault();
+            List<PageData> listPages = document.Pages.ToList();
+            listPages.Remove(page);
+            document.Pages = listPages.ToArray();
             var update = Builders<BlogData>.Update.Set("BlogDocument", document);
             _database.GetCollection<BlogData>(blogName).UpdateOne(data => true, update);
         }

@@ -17,8 +17,10 @@ namespace BlueApeUI.Contracts
         public Task<ResponseModel> deleteBlog(string name);
         public Task<ResponseModel> lookForPost(string blogName, string postName);
         public Task<ResponseModel> getPost(string blogName, string postName);
+        public Task<ResponseModel> getPage(string blogName, string pageName);
         public Task<ResponseModel> addPost(BlogData body);
         public Task<ResponseModel> updatePost(BlogData body);
         public Task<ResponseModel> deletePost(string blogName, string postName);
+        public Task<ResponseModel> deletePage(string blogName, string pageName);
     }
 }

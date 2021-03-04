@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeUI\\BlueApeUI.csproj": {}
+    "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeUI\\BlueApeUI.csproj": {
+    "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
+        "projectUniqueName": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
         "projectName": "BlueApeUI",
-        "projectPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
+        "projectPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
         "packagesPath": "C:\\Users\\sycho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeUI\\obj\\",
+        "outputPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

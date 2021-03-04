@@ -9258,11 +9258,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
+      "projectUniqueName": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
       "projectName": "BlueApeAPI",
-      "projectPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
+      "projectPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
       "packagesPath": "C:\\Users\\sycho\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeAPI\\obj\\",
+      "outputPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

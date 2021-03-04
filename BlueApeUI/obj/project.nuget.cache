@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pVkx3BxtlMWlh/9D+wWG/SkUIBT+UGgUEoMK2c7aBBJnolXgPAuJ2gBM070bGh48xYrFnP9IpJ+VKweYCWnTiA==",
+  "dgSpecHash": "zZcIa8SQjo4vcNU5h+IyggcTHQiHMS0DB774S0SnoWJGI70ykrKm0oP9U6pz7/KMbqPOGnf1321ki3pNFZgElA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sycho\\OneDrive\\Desktop\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
+  "projectFilePath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sycho\\.nuget\\packages\\blazored.localstorage\\3.0.0\\blazored.localstorage.3.0.0.nupkg.sha512",
     "C:\\Users\\sycho\\.nuget\\packages\\blazored.texteditor\\1.0.3\\blazored.texteditor.1.0.3.nupkg.sha512",

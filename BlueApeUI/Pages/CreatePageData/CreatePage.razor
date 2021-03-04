@@ -195,17 +195,10 @@ else
         );
         if (!string.IsNullOrEmpty(PageName))
         {
-            ///here to check if page and than display page data not post
             bool isPost = this.CheckIfIsPost();
             ResponseModel result;
-            if (isPost)
-            {
-                result = await _blogsRepo.getPost(Title, PageName);
-            }
-            else
-            {
-                result = null; /// result get page data
-            }
+            if (isPost) result = await _blogsRepo.getPost(Title, PageName);
+            else result = await _blogsRepo.getPage(Title, PageName);
             if (result.isSuccess)
             {
                 PageData body = JsonConvert.DeserializeObject<PageData>(result.content);
@@ -230,8 +223,10 @@ else
     }
     private async Task onDeleteClick()
     {
-        ///check if page or post and run different delete
-        var response = await _blogsRepo.deletePost(Title, model.title);
+        bool isPost = this.CheckIfIsPost();
+        ResponseModel response;
+        if (isPost) response = await _blogsRepo.deletePost(Title, model.title);
+        else response = await _blogsRepo.deletePage(Title, model.title);
         if (!response.isSuccess)
         {
             errorMessage = response.message;

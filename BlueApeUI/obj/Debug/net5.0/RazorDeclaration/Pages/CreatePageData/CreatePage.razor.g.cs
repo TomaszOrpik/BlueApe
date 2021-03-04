@@ -13,168 +13,167 @@ namespace BlueApeUI.Pages.CreatePageData
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 1 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 2 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using System.Net.Http.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 3 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 4 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 5 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 6 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 7 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 8 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 9 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 10 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 11 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Radzen.Blazor;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 12 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using Blazored.LocalStorage;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 14 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 15 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 16 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 16 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 17 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 17 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Models.Requests;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 18 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 18 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Models.Responses;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 19 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 19 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Contracts;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 20 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 20 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Services;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 21 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 21 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Providers;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 22 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\_Imports.razor"
+#line 22 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\_Imports.razor"
 using BlueApeUI.Utilities;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 13 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
+#line 12 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
 using Newtonsoft.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
+#line 13 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
 using Blazored.TextEditor;
 
 #line default
 #line hidden
 #nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/page-editor")]
-    [Microsoft.AspNetCore.Components.RouteAttribute("/page-editor/{Title}")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/page-editor/{Title}/{PageName}")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/post-editor")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/post-editor/{Title}")]
@@ -187,7 +186,7 @@ using Blazored.TextEditor;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 154 "C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
+#line 153 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
        
     [Parameter]
     public string Title { get; set; }
@@ -233,7 +232,10 @@ using Blazored.TextEditor;
         );
         if (!string.IsNullOrEmpty(PageName))
         {
-            var result = await _blogsRepo.getPost(Title, PageName);
+            bool isPost = this.CheckIfIsPost();
+            ResponseModel result;
+            if (isPost) result = await _blogsRepo.getPost(Title, PageName);
+            else result = await _blogsRepo.getPage(Title, PageName);
             if (result.isSuccess)
             {
                 PageData body = JsonConvert.DeserializeObject<PageData>(result.content);
@@ -258,7 +260,10 @@ using Blazored.TextEditor;
     }
     private async Task onDeleteClick()
     {
-        var response = await _blogsRepo.deletePost(Title, model.title);
+        bool isPost = this.CheckIfIsPost();
+        ResponseModel response;
+        if (isPost) response = await _blogsRepo.deletePost(Title, model.title);
+        else response = await _blogsRepo.deletePage(Title, model.title);
         if (!response.isSuccess)
         {
             errorMessage = response.message;
@@ -283,16 +288,7 @@ using Blazored.TextEditor;
     }
     private async Task formSubmit()
     {
-        string[] uris = _navMan.Uri.Split('/');
-        string[] uri = _navMan.Uri.Trim(_navMan.BaseUri.ToCharArray()).Split('/');
-
-        Console.WriteLine(string.Join('^', uri));
-        Console.WriteLine(string.Join('^', uris));
-        Console.WriteLine(uris[3]);
-        bool isPost = uris[3] == "post-editor";
-
-
-        /*
+        bool isPost = this.CheckIfIsPost();
         string content = await this.QuillHtml.GetHTML();
         PageData pageData = new PageData
         {
@@ -304,6 +300,7 @@ using Blazored.TextEditor;
             Content = content
         };
         var postsList = data.BlogDocument.Posts.ToList();
+        var pagesList = data.BlogDocument.Pages.ToList();
 
         if (string.IsNullOrEmpty(PageName))
         {
@@ -320,18 +317,33 @@ using Blazored.TextEditor;
         }
         else
         {
-            int index = postsList.FindIndex(el => el.Title == model.title);
-            postsList[index] = pageData;
-            data.BlogDocument.Posts = postsList.ToArray();
-            var response = await _blogsRepo.updatePost(data);
-            if (!response.isSuccess)
+            if (isPost)
             {
-                errorMessage = response.message;
-                errorMessageType = Models.AlertMessageTypes.Error;
+                int index = postsList.FindIndex(el => el.Title == model.title);
+                postsList[index] = pageData;
+                data.BlogDocument.Posts = postsList.ToArray();
+                var response = await _blogsRepo.updatePost(data);
+                if (!response.isSuccess)
+                {
+                    errorMessage = response.message;
+                    errorMessageType = Models.AlertMessageTypes.Error;
+                }
+                else _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
             }
-            else _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
+            else
+            {
+                int pageIndex = pagesList.FindIndex(el => el.Title == model.title);
+                pagesList[pageIndex] = pageData;
+                data.BlogDocument.Pages = pagesList.ToArray();
+                var response = await _blogsRepo.updatePost(data);
+                if (!response.isSuccess)
+                {
+                    errorMessage = response.message;
+                    errorMessageType = Models.AlertMessageTypes.Error;
+                }
+                else _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
+            }
         }
-        */
     }
     private async Task pageImageSend(InputFileChangeEventArgs e)
     {
@@ -388,6 +400,13 @@ using Blazored.TextEditor;
     {
         List<string> categories = value.Split(",").ToList();
         this.model.categories = categories.ToArray();
+    }
+
+    private bool CheckIfIsPost()
+    {
+        string[] uri = _navMan.Uri.Split('/');
+        if (uri[3] == "page-editor") return false;
+        else return true;
     }
 
 #line default

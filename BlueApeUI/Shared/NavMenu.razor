@@ -15,16 +15,6 @@
                         <img class="nav-link-body fixed" width="40" height="40" src="./Assets/Icons/blogEditorWhite.png" />
                     </NavLink>
                 </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="@links[1]" Match="NavLinkMatch.Prefix">
-                        <img class="nav-link-body fixed" width="40" height="40" src="./Assets/Icons/addPostWhite.png" />
-                    </NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="@links[2]" Match="NavLinkMatch.Prefix">
-                        <img class="nav-link-body fixed" width="40" height="40" src="./Assets/Icons/editPagesWhite.png" />
-                    </NavLink>
-                </li>
             }
         </ul>
     </div>
@@ -63,7 +53,5 @@
     {
         base.OnParametersSet();
         links.Add($"/blog-designer/{Title}");
-        links.Add($"/blog-editor/{Title}");
-        links.Add($"/page-selector/{Title}");
     }
 }

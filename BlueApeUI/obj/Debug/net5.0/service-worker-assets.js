@@ -117,7 +117,7 @@
       "url": "_content\/Blazored.TextEditor\/quill-blot-formatter.min.js"
     },
     {
-      "hash": "sha256-4zrB14OsKggUZrNR8x+PN9qhV3qjurAyEEs4RmHFB7s=",
+      "hash": "sha256-fxlWITl58KYNE1WD7G38dwy4qVvLdVt3XkqO+OujZS0=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -973,11 +973,11 @@
       "url": "_framework\/dotnet.5.0.3.js"
     },
     {
-      "hash": "sha256-ZXBPjGUhUdjihle\/8AnvXa9ZKUqtsr\/I1e7q4tJPuXQ=",
+      "hash": "sha256-FuWJO+h0m6T8FqWIpZHA9eDaTLHf9kc9PohnYHi9GLE=",
       "url": "_framework\/BlueApeUI.dll"
     },
     {
-      "hash": "sha256-9QeZlV2tHp2Bb4LFrs660A3E4Dbf68cY0EMCk\/U0S1g=",
+      "hash": "sha256-vmUej0kVLyVoHHnH3EGdQ7ABIV7hhugmmLglkBKPSkc=",
       "url": "_framework\/BlueApeUI.pdb"
     },
     {
@@ -1833,7 +1833,7 @@
       "url": "_framework\/icudt_no_CJK.dat.gz"
     },
     {
-      "hash": "sha256-fKfJ5Rwf4OzotVawFzVW8xeu9ZbXTYyHaXbOyYCrkpU=",
+      "hash": "sha256-QHarRJlZbIj+4MI0nJ\/Zovua2177vyZko\/5b4K5b8v0=",
       "url": "_framework\/dotnet.5.0.3.js.gz"
     },
     {
@@ -1981,5 +1981,5 @@
       "url": "BlueApeUI.bundle.scp.css"
     }
   ],
-  "version": "uQIbFjDO"
+  "version": "d8LwdRhF"
 };

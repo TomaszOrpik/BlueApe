@@ -70,6 +70,12 @@ namespace BlueApeUI.Services
             string responseContent = await response.Content.ReadAsStringAsync();
             return ResponseUtilities.ResponseValidation(response.StatusCode, responseContent);
         }
+        public async Task<ResponseModel> getPage(string blogName, string pageName)
+        {
+            var response = await _client.GetAsync($"{_client.BaseAddress}api/v1/Blogs/GetPageData/{blogName}/{pageName}").ConfigureAwait(false);
+            string responseContent = await response.Content.ReadAsStringAsync();
+            return ResponseUtilities.ResponseValidation(response.StatusCode, responseContent);
+        }
         public async Task<ResponseModel> addPost(BlogData body)
         {
             string json = JsonConvert.SerializeObject(body);
@@ -87,6 +93,11 @@ namespace BlueApeUI.Services
         public async Task<ResponseModel> deletePost(string blogName, string postName)
         {
             var response = await _client.DeleteAsync($"{_client.BaseAddress}api/v1/Blogs/DeletePostData/{blogName}/{postName}");
+            return ResponseUtilities.ResponseValidation(response.StatusCode, string.Empty);
+        }
+        public async Task<ResponseModel> deletePage(string blogName, string pageName)
+        {
+            var response = await _client.DeleteAsync($"{_client.BaseAddress}api/v1/Blogs/DeletePageData/{blogName}/{pageName}");
             return ResponseUtilities.ResponseValidation(response.StatusCode, string.Empty);
         }
     }

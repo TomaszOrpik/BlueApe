@@ -241,9 +241,11 @@
                 pages.Add(new PageData
                 {
                     Title = page,
-                    ImageUrl = "",
-                    Intro = "",
-                    Content = ""
+                    ImageUrl = "./Assets/bg-5example.jpg",
+                    Intro = "Default Page introduction",
+                    Content = Utilities.Placeholders.dummyText,
+                    Categories = new List<string>() { "Page" }.ToArray(),
+                    Date = DateTime.Today.ToString("dd/mm/yyyy")
                 });
             BlogDocument document = new BlogDocument
             {
@@ -273,9 +275,11 @@
                 if (index == 0) pages.Add(new PageData
                 {
                     Title = pageName,
-                    ImageUrl = "",
-                    Intro = "",
-                    Content = ""
+                    ImageUrl = "./Assets/bg-5example.jpg",
+                    Intro = "Default Page introduction",
+                    Content = Utilities.Placeholders.dummyText,
+                    Categories = new List<string>() { "Page" }.ToArray(),
+                    Date = DateTime.Today.ToString("dd/mm/yyyy")
                 });
             }
             BlogDocument document = new BlogDocument

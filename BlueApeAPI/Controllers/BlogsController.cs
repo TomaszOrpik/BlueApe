@@ -210,6 +210,30 @@ namespace BlueApeAPI.Controllers
             }
         }
         /// <summary>
+        /// Return content of page with specific name from specific blog
+        /// </summary>
+        /// <param name="blogName"></param>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        [HttpGet("{blogName}/{pageName}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetPageData(string blogName, string pageName)
+        {
+            try
+            {
+                var data = _blogDataService.GetPage(blogName, pageName);
+                if (data is null) return NotFound();
+                return Ok(data);
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"Request ended with error: {e.Message}");
+                return BadRequest(e.Message);
+            }
+        }
+        /// <summary>
         /// Update post for specific blog
         /// </summary>
         /// <param name="data"></param>
@@ -265,6 +289,28 @@ namespace BlueApeAPI.Controllers
             try
             {
                 _blogDataService.DeletePost(blogName, postName);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"Request ended with error: {e.Message}");
+                return BadRequest(e.Message);
+            }
+        }
+        /// <summary>
+        /// delete page with passed name from blog with specific name
+        /// </summary>
+        /// <param name="blogName"></param>
+        /// <param name="pageName"></param>
+        /// <returns></returns>
+        [HttpDelete("{blogName}/{pageName}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult DeletePageData(string blogName, string pageName)
+        {
+            try
+            {
+                _blogDataService.DeletePage(blogName, pageName);
                 return NoContent();
             }
             catch (Exception e)
