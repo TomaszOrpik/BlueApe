@@ -24,30 +24,20 @@
             </div>
         </div>
     </div>
-    <BlogPosts posts="@displayedPosts" isActive="@true" title="@title"></BlogPosts>
+    <BlogPosts posts="@displayedPosts" isActive="@true" title="@title" scale="2"></BlogPosts>
+    <div class="row">
 
-
-    <!--here to add post list-->
-    <!--here to add page change list-->
-    <!--walić już te katefgorie skoro nie są ważne-->
+            @for (int x = 0; x <= subPages; x++)
+            {
+                <div class="pageCount" @onclick="args => GoToPage(x)">@x</div>
+            }
+        
+    </div>
 
 </div>
 <div class="moveRight">
     <BlogFooter></BlogFooter>
 </div>
-
-<div class="row">
-    @if (subPages > 0)
-    {
-        for (int x = 0; x > subPages; x++)
-        {
-            <div class="pageCount" @onclick="args => GoToPage(x)">@x</div>
-        }
-    }
-    Pages
-</div>
-
-
 
 <style>
     .container {
@@ -81,15 +71,17 @@
         font-weight: 700;
         font-size: 36px;
     }
-</style>
-
-
-
-<style>
     .pageCount {
         width: 50px;
         height: 50px;
-        border: 1px solid black;
+        border: 1px dashed black;
+        margin-bottom: 25px;
+        margin-right: 25px;
+        line-height: 50px;
+        text-align: center;
+        font-weight: 900;
+        font-size: 26px;
+        cursor: pointer;
     }
 
     .moveRight {
@@ -155,15 +147,18 @@
                     (result.content);
                 Console.WriteLine(blogModel.title);
                 posts = body.BlogDocument.Posts;
-                subPages = posts.Count() > 9 ?
-                Convert.ToInt32(posts.Count().ToString().Remove(posts.Count().ToString().Length - 1)) : 0;
+                int numberOfPosts = body.BlogDocument.Posts.Length;
+                if (numberOfPosts > 9) subPages = Convert.ToInt32(numberOfPosts.ToString().Remove(numberOfPosts.ToString().Length - 1));
             }
         }
         this.RerenderPosts();
     }
-    protected void GoToPage(int pageNum) //to change add category
+    protected void GoToPage(int pageNum)
     {
-        _navMan.NavigateTo($"/blog-editor/{_category}/{title}/{pageNum}");
+        _currentPage = pageNum;
+        this.RerenderPosts();
+        _currentPage = 0;
+        Console.WriteLine(_currentPage);
     }
     protected void OpenNewPostPage()
     {
@@ -181,6 +176,7 @@
             int index = listPosts.IndexOf(x);
             if (index >= startIndex && index < endIndex) newDisplayedPosts.Add(x);
         });
+        newDisplayedPosts.Reverse();
         this.displayedPosts = newDisplayedPosts.ToArray();
     }
 }

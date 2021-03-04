@@ -1450,3 +1450,5 @@ C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\servic
 C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\service-worker-assets.js
 C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\RazorDeclaration\Shared\BlogPosts.razor.g.cs
 C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\Razor\Shared\BlogPosts.razor.g.cs
+C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\RazorDeclaration\Shared\BlogWindow.razor.g.cs
+C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\Razor\Shared\BlogWindow.razor.g.cs

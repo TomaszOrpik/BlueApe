@@ -1,0 +1,59 @@
+﻿<div class="blogWindow">
+    <div>
+        <BlogNav model="@_model" scale="_scale" activeButtons="@_isActive" showTitle="@true"></BlogNav>
+    </div>
+    <div class="customContainer">
+        <BlogPosts posts="@_posts" scale="_scale" isActive="@_isActive" title="@_model.title"></BlogPosts>
+    </div>
+    <BlogFooter></BlogFooter>
+</div>
+
+<style>
+    .blogWindow {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public int scale { get; set; }
+    [Parameter]
+    public BlogSettings model { get; set; }
+    [Parameter]
+    public PageData[] posts { get; set; }
+    [Parameter]
+    public bool isActive { get; set; }
+    [Parameter]
+    public bool showTitle { get; set; }
+
+    private int _scale = 1;
+    private BlogSettings _model = new BlogSettings
+    (
+        "BlueApe Template",
+        "./Assets/BlueMonkeyLogo.png",
+        "Test template for your blog",
+        "#224CFF",
+        "#2f2f2f",
+        "#000000",
+        new List<string> { "Category A", "Category B", "Category C" },
+        new List<string> { "About Us", "Contact" },
+        "https://www.facebook.com",
+        "https://www.instagram.com",
+        "https://www.twitter.com"
+    );
+    private PageData[] _posts = Array.Empty<PageData>();
+    private bool _isActive = false;
+    private bool _showTitle = false;
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        _scale = scale;
+        _model = model;
+        _posts = posts;
+        _isActive = isActive;
+        _showTitle = showTitle;
+    }
+}

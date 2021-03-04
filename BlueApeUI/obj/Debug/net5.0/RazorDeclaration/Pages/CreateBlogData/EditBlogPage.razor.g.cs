@@ -191,7 +191,7 @@ using Newtonsoft.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 103 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreateBlogData\EditBlogPage.razor"
+#line 95 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreateBlogData\EditBlogPage.razor"
        
     [Parameter]
     public string title { get; set; }
@@ -247,15 +247,18 @@ using Newtonsoft.Json;
                     (result.content);
                 Console.WriteLine(blogModel.title);
                 posts = body.BlogDocument.Posts;
-                subPages = posts.Count() > 9 ?
-                Convert.ToInt32(posts.Count().ToString().Remove(posts.Count().ToString().Length - 1)) : 0;
+                int numberOfPosts = body.BlogDocument.Posts.Length;
+                if (numberOfPosts > 9) subPages = Convert.ToInt32(numberOfPosts.ToString().Remove(numberOfPosts.ToString().Length - 1));
             }
         }
         this.RerenderPosts();
     }
-    protected void GoToPage(int pageNum) //to change add category
+    protected void GoToPage(int pageNum)
     {
-        _navMan.NavigateTo($"/blog-editor/{_category}/{title}/{pageNum}");
+        _currentPage = pageNum;
+        this.RerenderPosts();
+        _currentPage = 0;
+        Console.WriteLine(_currentPage);
     }
     protected void OpenNewPostPage()
     {
@@ -273,6 +276,7 @@ using Newtonsoft.Json;
             int index = listPosts.IndexOf(x);
             if (index >= startIndex && index < endIndex) newDisplayedPosts.Add(x);
         });
+        newDisplayedPosts.Reverse();
         this.displayedPosts = newDisplayedPosts.ToArray();
     }
 

@@ -117,7 +117,7 @@
       "url": "_content\/Blazored.TextEditor\/quill-blot-formatter.min.js"
     },
     {
-      "hash": "sha256-fxlWITl58KYNE1WD7G38dwy4qVvLdVt3XkqO+OujZS0=",
+      "hash": "sha256-YBSMRdiVyWwprl2fy5cYo74xnGX11U3ycjNLtOGxk44=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -973,11 +973,11 @@
       "url": "_framework\/dotnet.5.0.3.js"
     },
     {
-      "hash": "sha256-FuWJO+h0m6T8FqWIpZHA9eDaTLHf9kc9PohnYHi9GLE=",
+      "hash": "sha256-j8\/Tw3oJa20lDJ8EtkYn5zt1E4wXI1g6Eq5lPFGaXc4=",
       "url": "_framework\/BlueApeUI.dll"
     },
     {
-      "hash": "sha256-vmUej0kVLyVoHHnH3EGdQ7ABIV7hhugmmLglkBKPSkc=",
+      "hash": "sha256-zspHcceIRO8+2bDeAx\/94z1ZZfM0ln+Ua4F0URxI0J4=",
       "url": "_framework\/BlueApeUI.pdb"
     },
     {
@@ -1981,5 +1981,5 @@
       "url": "BlueApeUI.bundle.scp.css"
     }
   ],
-  "version": "d8LwdRhF"
+  "version": "yd4dkdwp"
 };

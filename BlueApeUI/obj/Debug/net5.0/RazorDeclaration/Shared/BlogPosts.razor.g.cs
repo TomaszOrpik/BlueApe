@@ -174,7 +174,7 @@ using BlueApeUI.Utilities;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 46 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogPosts.razor"
+#line 73 "C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogPosts.razor"
        
     [Parameter]
     public PageData[] posts { get; set; }
@@ -182,17 +182,21 @@ using BlueApeUI.Utilities;
     public bool isActive { get; set; }
     [Parameter]
     public string title { get; set; }
+    [Parameter]
+    public int scale { get; set; }
 
     private List<PageData> _posts = new List<PageData>();
     private bool _isActive = false;
     private string _title = "title";
+    private int _scale = 1;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         if (posts != null && posts.Length > 0) _posts = posts.ToList();
-        isActive = _isActive;
+        _isActive = isActive;
         if (title != null) _title = title;
+        if (scale != 0) _scale = scale;
     }
 
 #line default

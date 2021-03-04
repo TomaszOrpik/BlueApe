@@ -73,19 +73,20 @@
 
         </div>
         <div class="col-6 fullHeight">
-            <div class="blogWindow">
-                <div>
-                    <BlogNav model="@model"></BlogNav>
-                </div>
-                <div class="blogMain"><!--HERE WILL GO PAGE SCREEN IF ITS LOAD AND EXISTING PAGE--></div>
-                <BlogFooter></BlogFooter>
-            </div>
+            <BlogWindow scale="1" model="@model" posts="@posts.ToArray()" isActive="@false" showTitle="@true"></BlogWindow>
         </div>
     </div>
 </div>
 
 
 <style>
+    .customContainer {
+        width: 100%;
+        height: 85vh;
+        overflow-y: hidden;
+        padding-top: 170px;
+        padding-left: 60px;
+    }
     .form-group {
         display: flex;
         flex-direction: row;
@@ -107,12 +108,6 @@
 
     .fullHeight {
         height: 85vh;
-    }
-    .blogWindow {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
     .blogMain {
         background-color: white;

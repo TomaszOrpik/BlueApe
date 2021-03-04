@@ -39,13 +39,22 @@
 </div>
 
 <style>
+    h1 {
+        font-size: @((_scale*20).ToString()+"px");
+    }
+    span {
+        font-size: @((_scale*13).ToString()+"px")
+    }
+    h3 {
+        font-size: @((_scale*12).ToString()+"px")
+    }
     .containerBody {
         width: 100%;
     }
 
     .bodySquare {
         width: 75%;
-        height: 300px;
+        height: @((_scale*150).ToString()+"px");
     }
 
     .squareBase {
@@ -68,16 +77,20 @@
     public bool isActive { get; set; }
     [Parameter]
     public string title { get; set; }
+    [Parameter]
+    public int scale { get; set; }
 
     private List<PageData> _posts = new List<PageData>();
     private bool _isActive = false;
     private string _title = "title";
+    private int _scale = 1;
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         if (posts != null && posts.Length > 0) _posts = posts.ToList();
-        isActive = _isActive;
+        _isActive = isActive;
         if (title != null) _title = title;
+        if (scale != 0) _scale = scale;
     }
 }

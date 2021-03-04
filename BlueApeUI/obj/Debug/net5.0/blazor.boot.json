@@ -216,11 +216,11 @@
       "mscorlib.dll": "sha256-OoIy6q8Z4O5iSevqVXHfYC14mo\/kaxz74ydYX19CiAA=",
       "netstandard.dll": "sha256-FbW0xcZkySFb6B8yBpUE8XmaiMacDVdXdN9GeDH6xu4=",
       "System.Private.CoreLib.dll": "sha256-AQbVm+Z+NByScjRZWDWQnNUk5PBVgwCSWPLQN4YxxZs=",
-      "BlueApeUI.dll": "sha256-FuWJO+h0m6T8FqWIpZHA9eDaTLHf9kc9PohnYHi9GLE="
+      "BlueApeUI.dll": "sha256-j8\/Tw3oJa20lDJ8EtkYn5zt1E4wXI1g6Eq5lPFGaXc4="
     },
     "lazyAssembly": null,
     "pdb": {
-      "BlueApeUI.pdb": "sha256-vmUej0kVLyVoHHnH3EGdQ7ABIV7hhugmmLglkBKPSkc="
+      "BlueApeUI.pdb": "sha256-zspHcceIRO8+2bDeAx\/94z1ZZfM0ln+Ua4F0URxI0J4="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-rFG55cwkAnfHzxmxwBL2tTwfj8X8cjcSEAlco4bc1eo=",
