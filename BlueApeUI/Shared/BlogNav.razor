@@ -1,0 +1,178 @@
+﻿<div class="topBar">
+    <div class="leftSide">
+        <div class="logo">
+            <img src=@model.logoUrl height=@(scale*35) />
+        </div>
+        @for (int j = 0; j < model.pages.Count() && j <= 7; j++)
+        {
+            <div class="pageLink">
+                @model.pages[j]
+            </div>
+        }
+    </div>
+
+    <div class="rightSide">
+        <div class="iconBox">
+            <img src="./Assets/Icons/instagram.svg"
+                 height=@(scale*35)
+                 width=@(scale*15) />
+        </div>
+        <div class="iconBox">
+            <img src="./Assets/Icons/twitter.svg"
+                 height=@(scale*35)
+                 width=@(scale*15) />
+        </div>
+        <div class="iconBox">
+            <img src="./Assets/Icons/facebook-app-symbol.svg"
+                 height=@(scale*35)
+                 width=@(scale*15) />
+        </div>
+    </div>
+</div>
+<div class="bottomBar">
+    <div class="title">
+        <span>@model.title</span>
+    </div>
+    <div class="categoryContainer">
+        @for (int i = 0; i < model.categories.Count() && i <= 7; i++)
+        {
+            <div class="catBox">
+                <span>@model.categories[i]</span>
+            </div>
+        }
+    </div>
+</div>
+
+@if (!showTitle)
+{
+    <style>
+        .title {
+            display: none !important;
+        }
+        .categoryContainer {
+            top: 0 !important;
+        }
+    </style>
+}
+
+<style>
+      .topBar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: @(Convert.ToString(scale*36)+"px");
+        background-color: @model.backgroundColor;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid #e8e8e8;
+    }
+    .bottomBar {
+        height: @(Convert.ToString(scale*125)+"px");
+        width: 100%;
+        position: absolute;
+        top: @(Convert.ToString(scale*36)+"px");
+        left: 0;
+        background: linear-gradient(0deg, rgba(0,0,0,0) 0%, @model.backgroundColor 99%);
+    }
+    .categoryContainer {
+        position: absolute;
+        top: @(Convert.ToString(scale * 75)+"px");
+        left: 0;
+        width: 100%;
+        height: @(Convert.ToString(scale * 50)+"px");
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .catBox {
+        margin: 0 @(Convert.ToString(scale * 10)+"px");
+        font-size: @(Convert.ToString(scale * 11)+"px");
+        font-weight: 700;
+        color: @model.secondaryColor;
+        cursor: pointer;
+    }
+    .catBox:hover {
+        color: @model.primaryColor;
+    }
+    .title {
+        position: absolute;
+        top: @(Convert.ToString(scale * 30)+"px");
+        width: 100%;
+        color: @model.secondaryColor;
+        font-family: 'Dancing Script', cursive;
+        font-size: @(Convert.ToString(scale * 32)+"px");
+        text-align: center;
+        cursor: default;
+        font-weight: 900;
+    }
+    .leftSide {
+        width: calc(100% - @(Convert.ToString(scale * 75)+"px"));
+        display: flex;
+        flex-direction: row;
+    }
+    .rightSide {
+        width: @(Convert.ToString(scale * 75)+"px");
+        display: flex;
+        flex-direction: row;
+    }
+    .logo {
+        width: auto;
+        height: @(Convert.ToString(scale * 35)+"px");
+        cursor: pointer;
+    }
+    .logo:hover {
+        background: rgb(168,168,168);
+        background: @model.secondaryColor;
+
+    }
+    .pageLink {
+        font-size: @(Convert.ToString(scale * 9)+"px");
+        font-weight: 700;
+        line-height: @(Convert.ToString(scale * 35)+"px");
+        text-align: center;
+        padding-right: @(Convert.ToString(scale * 5)+"px");
+        padding-left: @(Convert.ToString(scale * 5)+"px");
+        cursor: pointer;
+        color: white;
+    }
+    .pageLink:hover {
+        background: rgb(168,168,168);
+        background: @model.secondaryColor;
+    }
+    .customA {
+        color: #fff;
+        text-decoration: none;
+    }
+    .customA:hover {
+        background: rgb(168,168,168);
+        background: @model.secondaryColor;
+    }
+    .iconBox {
+        position: relative;
+        width: @(Convert.ToString(scale * 25)+"px");
+        color: white;
+        cursor: pointer;
+    }
+    .iconBox:hover {
+        background: rgb(168,168,168);
+        background: @model.secondaryColor;
+    }
+        .iconBox > img {
+            left: @(Convert.ToString(scale * 5)+"px");
+            position: absolute;
+        }
+</style>
+
+@code {
+    [Parameter]
+    public BlogSettings model { get; set; }
+    [Parameter]
+    public int scale { get; set; }
+    [Parameter]
+    public bool activeButtons { get; set; }
+    [Parameter]
+    public bool showTitle { get; set; }
+}

@@ -1,0 +1,29 @@
+﻿<div class="row">
+    <div class="left">
+        <img src=@imageUrl />
+    </div>
+    <div class="right">
+        <h2>@title</h2>
+        <span>@intro</span>
+    </div>
+</div>
+
+<style>
+    .right, .left {
+        width: 50%;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public string title { get; set; }
+    [Parameter]
+    public string imageUrl { get; set; }
+    [Parameter]
+    public string intro { get; set; }
+
+    private void GoToPage()
+    {
+        ///on click open page editor with selected post
+    }
+}

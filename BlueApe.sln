@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueApeAPI", "BlueApeAPI\BlueApeAPI.csproj", "{49654F32-B552-4741-9ED0-86E89CC674D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueApeUI", "BlueApeUI\BlueApeUI.csproj", "{00B9F22C-3DAE-406C-B220-D409DCB8FBB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49654F32-B552-4741-9ED0-86E89CC674D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49654F32-B552-4741-9ED0-86E89CC674D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49654F32-B552-4741-9ED0-86E89CC674D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49654F32-B552-4741-9ED0-86E89CC674D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00B9F22C-3DAE-406C-B220-D409DCB8FBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00B9F22C-3DAE-406C-B220-D409DCB8FBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00B9F22C-3DAE-406C-B220-D409DCB8FBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00B9F22C-3DAE-406C-B220-D409DCB8FBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BA7F320-2D7D-4770-BCD4-2A97D7E49551}
+	EndGlobalSection
+EndGlobal

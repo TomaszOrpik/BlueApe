@@ -1,0 +1,64 @@
+﻿@page "/register"
+@layout AuthLayout
+@using Models.Users.Requests
+
+@inject IAuthenticationRepository _authRepo
+@inject NavigationManager _navMan
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="cardTitle">Create a New Account</h2>
+        <EditForm Model="model" OnValidSubmit="RegisterUser">
+            <RadzenCard class="clearBorder">
+                <AlertMessage Message="@message" MessageType="@messageType" />
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <label>First Name</label>
+                <RadzenTextBox @bind-Value="model.Name"></RadzenTextBox>
+                <label>Last Name</label>
+                <RadzenTextBox @bind-Value="model.LastName"></RadzenTextBox>
+                <label>Email</label>
+                <RadzenTextBox @bind-Value="model.Email"></RadzenTextBox>
+                <label>Password</label>
+                <RadzenPassword @bind-Value="model.Password"></RadzenPassword>
+                <label>Confirm Password</label>
+                <RadzenPassword @bind-Value="model.ConfirmPassword"></RadzenPassword>
+                <hr />
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Register"
+                              ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2"
+                              Disabled="isBusy"></RadzenButton>
+                <RadzenButton ButtonType="Radzen.ButtonType.Button" Text="Login"
+                              ButtonStyle="Radzen.ButtonStyle.Secondary" class="btn-block mr-2"
+                              Disabled="isBusy" Click="GoToLogin"></RadzenButton>
+            </RadzenCard>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    RegisterEntity model = new RegisterEntity();
+
+    bool isBusy = false;
+    string message = string.Empty;
+    Models.AlertMessageTypes messageType = Models.AlertMessageTypes.Success;
+    public async Task RegisterUser()
+    {
+        isBusy = true;
+        var result = await _authRepo.Register(model);
+        if (result.StatusCode == System.Net.HttpStatusCode.Created)
+        {
+            message = "User Created Successfully";
+            messageType = Models.AlertMessageTypes.Success;
+        }
+        else
+        {
+            message = result.Token;
+            messageType = Models.AlertMessageTypes.Error;
+        }
+        isBusy = false;
+    }
+    void GoToLogin()
+    {
+        _navMan.NavigateTo("/login");
+    }
+}

@@ -1,0 +1,15 @@
+﻿@inject AuthenticationStateProvider _authStateProvider
+@inject NavigationManager _navMan 
+
+<AuthorizeView>
+    <RadzenButton Text="Logout" Click="Logout" class="mr-2"></RadzenButton>
+</AuthorizeView>
+
+@code {
+    async Task Logout()
+    {
+        var localStateProvider = (ApiAuthenticationProvider)_authStateProvider;
+        await localStateProvider.Logout();
+        _navMan.NavigateTo("/login");
+    }
+}

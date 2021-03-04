@@ -1,0 +1,7 @@
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="/" Path="C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="C:\Users\sycho\OneDrive\Desktop\BlueApe\BlueApeUI\obj\Debug\net5.0\scopedcss\bundle\" />
+  <ContentRoot BasePath="_content/Blazored.TextEditor" Path="C:\Users\sycho\.nuget\packages\blazored.texteditor\1.0.3\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Radzen.Blazor" Path="C:\Users\sycho\.nuget\packages\radzen.blazor\2.18.10\build\..\staticwebassets\" />
+  <ContentRoot BasePath="_content/Tewr.Blazor.FileReader" Path="C:\Users\sycho\.nuget\packages\tewr.blazor.filereader\3.0.0.20340\build\..\staticwebassets\" />
+</StaticWebAssets>

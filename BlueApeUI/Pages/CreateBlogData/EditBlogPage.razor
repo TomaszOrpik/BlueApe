@@ -1,0 +1,148 @@
+﻿@page "/blog-editor"
+@page "/blog-editor/{category}/{title}"
+@page "/blog-editor/{category}/{title}/{page}"
+
+@inject IBlogsManagerRepository _blogsRepo
+@inject NavigationManager _navMan
+
+@using Newtonsoft.Json;
+
+@attribute [Authorize]
+
+<div class="navigation">
+    <NavMenu Title="@title" />
+</div>
+
+<div class="moveRight">
+    <BlogNav model="@blogModel" scale="2" activeButtons="@true"></BlogNav>
+    @if(posts.Length > 0)
+    {
+        ///newest post
+    }
+    else
+    {
+        ///some div for margin top
+    }
+</div>
+<div class="container">
+
+</div>
+<div class="moveRight">
+    <BlogFooter></BlogFooter>
+</div>
+
+<!--On right side display all categories and on click filter for posts-->
+<!--Add navigation with latest post as header-->
+<!--list of posts-->
+<!--switch page-->
+
+<h3>EditBlogPage</h3>
+<div>Add post container on click - redirect to create post/page container without post data</div>
+<div style="width: 200px; height: 200px; background-color: red" @onclick="OpenNewPostPage">Click to go to post edytor</div>
+<div class="posts">
+    @for (int p = 0; p < 10; p++)
+    {
+        int activePage = Convert.ToInt32((page > 0 ? page.ToString() : "") + p.ToString());
+        if (activePage < posts.Length)
+        {
+            <blogViewContainer @onclick="args => OpenPostPage(posts[activePage])"
+                               title="@posts[activePage].Title"
+                               imageUrl="@posts[activePage].ImageUrl"
+                               intro="@posts[activePage].Intro"></blogViewContainer>
+        }
+    }
+</div>
+<div class="row">
+    @if (subPages > 0)
+    {
+        for (int x = 0; x > subPages; x++)
+        {
+            <div class="pageCount" @onclick="args => GoToPage(x)">@x</div>
+        }
+    }
+    Pages
+</div>
+
+Dodać for loop + if do sprawdzenia czy element istnieje, create page selector for every 10 elements
+<style>
+    .pageCount {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+    }
+
+    .moveRight {
+        position: absolute;
+        top: 0;
+        left: 60px;
+        width: calc(100% - 60px);
+    }
+</style>
+
+<!--blog nav add big version to make all 3x bigger-->
+<!-- display newest post-->
+<!-- display add post button post-->
+<!-- display all posts post-->
+
+@code {
+    [Parameter]
+    public string title { get; set; }
+    [Parameter]
+    public int page { get; set; }
+    [Parameter]
+    public string category { get; set; }
+
+    private BlogSettings blogModel = new BlogSettings("", "", "", "", "", "",
+        new List<string>(), new List<string>(), "", "", "");
+    private int _currentPage = 0;
+
+    private PageData[] posts = Array.Empty<PageData>();
+    private int subPages = 0;
+    ///passed page name to LookForPost
+    protected override async Task OnParametersSetAsync()
+    {
+        await base.OnParametersSetAsync();
+        if (this.page != 0) _currentPage = this.page;
+        if (!String.IsNullOrEmpty(title))
+        {
+            var result = await _blogsRepo.getBlogData(title);
+            if (result.isSuccess)
+            {
+                BlogData blogData = JsonConvert.DeserializeObject<BlogData>(result.content);
+                List<string> currentPages = new List<string>();
+                foreach (PageData page in blogData.BlogDocument.Pages) currentPages.Add(page.Title);
+                blogModel = new BlogSettings
+                (
+                    blogData.BlogDocument.BlogDetails.Title,
+                    blogData.BlogDocument.BlogDetails.LogoUrl,
+                    blogData.BlogDocument.BlogDetails.Description,
+                    blogData.BlogDocument.BlogDetails.PrimaryColor,
+                    blogData.BlogDocument.BlogDetails.SecondaryColor,
+                    blogData.BlogDocument.BlogDetails.BackgroundColor,
+                    blogData.BlogDocument.Categories.ToList(),
+                    currentPages.ToList(),
+                    blogData.BlogDocument.BlogDetails.FacebookLink,
+                    blogData.BlogDocument.BlogDetails.InstagramLink,
+                    blogData.BlogDocument.BlogDetails.TwitterLink
+                );
+                BlogData body = JsonConvert.DeserializeObject<BlogData>(result.content);
+                Console.WriteLine(blogModel.title);
+                posts = body.BlogDocument.Posts;
+                subPages = posts.Count() > 9 ?
+                    Convert.ToInt32(posts.Count().ToString().Remove(posts.Count().ToString().Length - 1)) : 0;
+            }
+        }
+    }
+    protected void GoToPage(int pageNum) //to change add category
+    {
+        _navMan.NavigateTo($"/page-editor/{title}/{pageNum}");
+    }
+    protected void OpenPostPage(PageData postPage)
+    {
+        ///redirect to edit post/page subpage with blog name and postPage as parameters
+    }
+    protected void OpenNewPostPage() //to change add category
+    {
+        _navMan.NavigateTo($"/page-editor/{title}");
+    }
+}

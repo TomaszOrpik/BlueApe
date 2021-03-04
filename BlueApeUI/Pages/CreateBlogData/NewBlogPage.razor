@@ -1,0 +1,364 @@
+﻿@page "/blog-designer"
+@page "/blog-designer/{title}"
+@inject IFileManagerRepository _fileRepo
+@inject IBlogsManagerRepository _blogsRepo
+@inject NavigationManager _navMan
+
+@using Newtonsoft.Json;
+
+@attribute [Authorize]
+
+<div class="navigation">
+    <NavMenu Title="@title" />
+</div>
+
+
+<div class="container">
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-6 fullHeight">
+            <EditForm model="model" OnValidSubmit="@formSubmit">
+                <AlertMessage Message="@errorMessage" MessageType="@errorMessageType" />
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogTitle">Title</label>
+                    <RadzenTextBox type="text" class="form-control" id="blogTitle" placeholder="Enter Blog Title" @bind-value="model.title" Change="@(args => ValidateBlogTitle(args))" Disabled="@(String.IsNullOrEmpty(title) ? false : true)"></RadzenTextBox>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogLogo">Logo</label>
+                    <div class="form-control">
+                        Click to choose file...
+                        <InputFile class="fileInputHide" id="blogLogo" placeholder="Logo" OnChange="logoSend" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogDescription">Description</label>
+                    <RadzenTextArea class="form-control" id="blogDescription" placeholder="Enter Blog Description here..." Change=@(args => this.model.description = args) Value="@model.description"></RadzenTextArea>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogPrimaryColor">Primary Color</label>
+                    <RadzenColorPicker ShowHSV="true" ShowRGBA="true" ShowColors="true" class="form-control color" id="blogPrimaryColor" Value="@model.primaryColor" Change="@(args => this.model.primaryColor = args)" />
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogSecondaryyColor">Secondary Color</label>
+                    <RadzenColorPicker ShowHSV="true" ShowRGBA="true" ShowColors="true" class="form-control color" id="blogSecondaryColor" Value="@model.secondaryColor" Change="@(args => this.model.secondaryColor = args)" />
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogBackgroundyColor">Background Color</label>
+                    <RadzenColorPicker ShowHSV="true" ShowRGBA="true" ShowColors="true" class="form-control color" id="blogBackgroundyColor" Value="@model.backgroundColor" Change="@(args => this.model.backgroundColor = args)" />
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogCategories">Categories</label>
+                    <RadzenTextArea class="form-control" id="blogDCategories" placeholder="Enter Blog Categories here, separated with comma..." Change=@(args => categoriesChanged(args)) Value="@String.Join(", ", model.categories)"></RadzenTextArea>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogPages">Pages</label>
+                    <RadzenTextArea class="form-control" id="blogPages" placeholder="Enter Custom Pages for your blog here, seprated with comma..." Change=@(args => pagesChanged(args)) Value="@String.Join(", ", model.pages)"></RadzenTextArea>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogFacebook">Facebook</label>
+                    <RadzenTextBox type="text" class="form-control" id="blogFacebook" placeholder="Enter Link to your facebook page..." Change="@(args => this.model.facebookLink = args)" Value="@model.facebookLink"></RadzenTextBox>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogInstagram">Instagram</label>
+                    <RadzenTextBox type="text" class="form-control" id="blogInstagram" placeholder="Enter Link to your instagram page..." Change="@(args => this.model.instagramLink = args)" Value="@model.instagramLink"></RadzenTextBox>
+                </div>
+                <div class="form-group">
+                    <label class="blogCreatorLabel" for="blogTwitter">Twitter</label>
+                    <RadzenTextBox type="text" class="form-control" id="blogTwitter" placeholder="Enter Link to your twitter page..." Change="@(args => this.model.twitterLink = args)" Value="@model.twitterLink"></RadzenTextBox>
+                </div>
+                @if (!string.IsNullOrEmpty(title)) { <RadzenButton ButtonType="Radzen.ButtonType.Button" Text="Delete" ButtonStyle="Radzen.ButtonStyle.Danger" class="btn-block mr-2" Click="onDeleteClick"></RadzenButton>}
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Submit" ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2"></RadzenButton>
+            </EditForm>
+
+        </div>
+        <div class="col-6 fullHeight">
+            <div class="blogWindow">
+                <div>
+                    <BlogNav model="@model"></BlogNav>
+                </div>
+                <div class="blogMain"><!--HERE WILL GO PAGE SCREEN IF ITS LOAD AND EXISTING PAGE--></div>
+                <BlogFooter></BlogFooter>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .form-group {
+        display: flex;
+        flex-direction: row;
+    }
+    .form-control.color {
+        width: 25%;
+    }
+    .fileInputHide {
+        opacity: 0;
+        width: 100%;
+        transform: translateY(-29px);
+    }
+    .blogCreatorLabel {
+        margin-top: 6px;
+        margin-right: 19px;
+        font-weight: 700;
+    }
+
+
+    .fullHeight {
+        height: 85vh;
+    }
+    .blogWindow {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .blogMain {
+        background-color: white;
+        width: 100%;
+        height: calc(100% - 25px);
+    }
+</style>
+
+@code {
+    [Parameter]
+    public string title { get; set; }
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private string _userName;
+
+    BlogSettings model = new BlogSettings
+    (
+        "BlueApe Template",
+        "./Assets/BlueMonkeyLogo.png",
+        "Test template for your blog",
+        "#224CFF",
+        "#2f2f2f",
+        "#000000",
+        new List<string> { "Category A", "Category B", "Category C" },
+        new List<string> { "About Us", "Contact" },
+        "https://www.facebook.com",
+        "https://www.instagram.com",
+        "https://www.twitter.com"
+    );
+    private List<PageData> pages = new List<PageData>();
+    private UserDetails currentUser;
+    private List<PageData> posts = new List<PageData>();
+
+    private string errorMessage = string.Empty;
+    Models.AlertMessageTypes errorMessageType = Models.AlertMessageTypes.Success;
+
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var authenticationState = await authenticationStateTask;
+        _userName = authenticationState.User.Identity.Name;
+        if (!string.IsNullOrEmpty(title))
+        {
+            var result = await _blogsRepo.getBlogData(title);
+            if (result.isSuccess)
+            {
+                BlogData body = JsonConvert.DeserializeObject<BlogData>(result.content);
+                List<string> currentPages = new List<string>();
+                pages = body.BlogDocument.Pages.ToList();
+                posts = body.BlogDocument.Posts.ToList();
+                currentUser = body.BlogDocument.UserDetails;
+                foreach (PageData page in body.BlogDocument.Pages) currentPages.Add(page.Title);
+                model = new BlogSettings
+                (
+                    body.BlogDocument.BlogDetails.Title,
+                    body.BlogDocument.BlogDetails.LogoUrl,
+                    body.BlogDocument.BlogDetails.Description,
+                    body.BlogDocument.BlogDetails.PrimaryColor,
+                    body.BlogDocument.BlogDetails.SecondaryColor,
+                    body.BlogDocument.BlogDetails.BackgroundColor,
+                    body.BlogDocument.Categories.ToList(),
+                    currentPages.ToList(),
+                    body.BlogDocument.BlogDetails.FacebookLink,
+                    body.BlogDocument.BlogDetails.InstagramLink,
+                    body.BlogDocument.BlogDetails.TwitterLink
+                );
+                ///getPageScreen
+            }
+            else
+            {
+                errorMessage = result.message;
+                errorMessageType = Models.AlertMessageTypes.Error;
+            }
+        }
+    }
+
+    private async Task onDeleteClick()
+    {
+        var response = await _blogsRepo.deleteBlog(model.title);
+        if (!response.isSuccess)
+        {
+            errorMessage = response.message;
+            errorMessageType = Models.AlertMessageTypes.Error;
+        }
+        else
+        {
+            string[] url = model.logoUrl.Split('/');
+            await _fileRepo.DeleteLogo(url[url.Length-1]);
+            _navMan.NavigateTo("/");
+        }
+    }
+
+    private string getPageScreen()
+    {
+        throw new NotImplementedException();
+        /// get data of the page captured from main screen
+    }
+
+    private async Task formSubmit()
+    {
+        BlogDetails details = new BlogDetails
+        {
+            Title = model.title,
+            LogoUrl = model.logoUrl,
+            Description = model.description,
+            PrimaryColor = model.primaryColor,
+            SecondaryColor = model.secondaryColor,
+            BackgroundColor = model.backgroundColor,
+            FacebookLink = model.facebookLink,
+            InstagramLink = model.instagramLink,
+            TwitterLink = model.twitterLink
+        };
+        if (string.IsNullOrEmpty(title))
+        {
+            //new blog
+
+            UserDetails user = new UserDetails
+            {
+                UserName = _userName+PasswordUtilities.CreatePassword(3),
+                Password = PasswordUtilities.CreatePassword(6)
+            };
+            List<PageData> pages = new List<PageData>();
+            foreach (string page in model.pages)
+                pages.Add(new PageData
+                {
+                    Title = page,
+                    ImageUrl = "",
+                    Intro = "",
+                    Content = ""
+                });
+            BlogDocument document = new BlogDocument
+            {
+                BlogDetails = details,
+                UserDetails = user,
+                Pages = pages.ToArray(),
+                Categories = model.categories.ToArray(),
+                Posts = new List<PageData>().ToArray()
+            };
+            BlogData data = new BlogData { BlogDocument = document };
+            BlogRequestBody reqBody = new BlogRequestBody { UserEmail = _userName, data = data };
+            var response = await _blogsRepo.postBlogData(reqBody);
+            if (!response.isSuccess)
+            {
+                errorMessage = response.message;
+                errorMessageType = Models.AlertMessageTypes.Error;
+            }
+            else _navMan.NavigateTo($"/blog-editor/all/{model.title}");
+        }
+        else
+        {
+            //existing
+
+            foreach (string pageName in model.pages)
+            {
+                int index = pages.FindIndex(page => page.Title == pageName);
+                if (index == 0) pages.Add(new PageData
+                {
+                    Title = pageName,
+                    ImageUrl = "",
+                    Intro = "",
+                    Content = ""
+                });
+            }
+            BlogDocument document = new BlogDocument
+            {
+                BlogDetails = details,
+                UserDetails = currentUser,
+                Pages = pages.ToArray(),
+                Categories = model.categories.ToArray(),
+                Posts = posts.ToArray()
+            };
+            BlogData data = new BlogData { BlogDocument = document };
+            BlogRequestBody reqBody = new BlogRequestBody { UserEmail = currentUser.UserName, data = data };
+            var response = await _blogsRepo.updateBlogData(reqBody);
+            if (!response.isSuccess)
+            {
+                errorMessage = response.message;
+                errorMessageType = Models.AlertMessageTypes.Error;
+            }
+            else _navMan.NavigateTo($"/blog-editor/all/{model.title}");
+        }
+    }
+    private async Task logoSend(InputFileChangeEventArgs e)
+    {
+        var maxAllowedFiles = 1;
+        var format = "image/png";
+        var file = e.GetMultipleFiles(maxAllowedFiles)[0];
+
+        if (file.ContentType != format)
+        {
+            errorMessage = "File isn't in png format";
+            errorMessageType = Models.AlertMessageTypes.Warning;
+            return;
+        }
+        var result = await _fileRepo.UploadLogo(e.GetMultipleFiles(maxAllowedFiles)[0], format);
+
+        if (result.isSuccess)
+        {
+            errorMessage = result.message;
+            errorMessageType = Models.AlertMessageTypes.Success;
+            model.logoUrl = result.content;
+            return;
+        }
+        else
+        {
+            errorMessage = result.message;
+            errorMessageType = Models.AlertMessageTypes.Error;
+            return;
+        }
+
+    }
+    private async void ValidateBlogTitle(string value)
+    {
+        var result = await _blogsRepo.checkIfExist(value);
+        if (result.isSuccess)
+        {
+            if (result.content != "false" || string.IsNullOrWhiteSpace(value))
+            {
+                errorMessage = "Name Taken";
+                errorMessageType = Models.AlertMessageTypes.Warning;
+                return;
+            }
+            else
+            {
+                errorMessage = "Name valid";
+                errorMessageType = Models.AlertMessageTypes.Success;
+                return;
+            }
+        }
+        else
+        {
+            errorMessage = result.message;
+            errorMessageType = Models.AlertMessageTypes.Error;
+            return;
+        }
+    }
+    private void categoriesChanged(string value)
+    {
+        List<string> categories = value.Split(",").ToList();
+        this.model.categories = categories;
+    }
+    private void pagesChanged(string value)
+    {
+        List<string> pages = value.Split(",").ToList();
+        this.model.pages = pages;
+    }
+}

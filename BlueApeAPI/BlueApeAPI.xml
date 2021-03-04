@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlueApeAPI</name>
+    </assembly>
+    <members>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.LookForBlog(System.String)">
+            <summary>
+            Check if blog with specific name exists in database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.GetUserBlogs(System.String)">
+            <summary>
+            Get all blog names for specific user
+            </summary>
+            <param name="userName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.CreateBlog(BlueApeAPI.Models.Collections.BlogRequestBody)">
+            <summary>
+            Creates new blog in database and adds user-blog pair
+            </summary>
+            <param name="blogRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.GetBlogData(System.String)">
+            <summary>
+            Get selected blog data from blogs database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.UpdateBlogData(BlueApeAPI.Models.Collections.BlogRequestBody)">
+            <summary>
+            Update passed blog in blogs database
+            </summary>
+            <param name="blogRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.DeleteBlog(System.String)">
+            <summary>
+            Return blog with passed name and userName
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.LookForPost(System.String,System.String)">
+            <summary>
+            Check if post with specific name exists in blog with specific name
+            </summary>
+            <param name="blogName"></param>
+            <param name="postName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.GetPostData(System.String,System.String)">
+            <summary>
+            Return content of post with specific name from specific blog
+            </summary>
+            <param name="blogName"></param>
+            <param name="postName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.AddPostData(BlueApeAPI.Models.Collections.BlogData)">
+            <summary>
+            Update post for specific blog
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.UpdatePostData(BlueApeAPI.Models.Collections.BlogData)">
+            <summary>
+            Update passed post in specific blog
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.BlogsController.DeletePostData(System.String,System.String)">
+            <summary>
+            delete post with passed name from blog with specific name
+            </summary>
+            <param name="blogName"></param>
+            <param name="postName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Index">
+            <summary>
+            GET: HomeController
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Details(System.Int32)">
+            <summary>
+            GET: HomeController/Details/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.TestDownload">
+            <summary>
+            GET: HomeController/Create
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Create(Microsoft.AspNetCore.Http.IFormCollection)">
+            <summary>
+            POST: HomeController/Create
+            </summary>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Edit(System.Int32)">
+            <summary>
+            GET: HomeController/Edit/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Edit(System.Int32,Microsoft.AspNetCore.Http.IFormCollection)">
+            <summary>
+            POST: HomeController/Edit/5
+            </summary>
+            <param name="id"></param>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Delete(System.Int32)">
+            <summary>
+            GET: HomeController/Delete/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.HomeController.Delete(System.Int32,Microsoft.AspNetCore.Http.IFormCollection)">
+            <summary>
+            POST: HomeController/Delete/5
+            </summary>
+            <param name="id"></param>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.UsersController.UserData">
+            <summary>
+            GET userData
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.UsersController.Register(BlueApeAPI.Models.Users.Requests.RegisterEntity)">
+            <summary>
+            POST Register new User
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueApeAPI.Controllers.UsersController.Login(BlueApeAPI.Models.Users.Requests.LoginEntity)">
+            <summary>
+            POST login request to API
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueApeAPI.Models.Users.Responses.LoginResponse">
+            Unused to think of deleting
+        </member>
+        <member name="M:BlueApeAPI.Services.BlogsService.LookForBlog(System.String)">
+            Search database for specific blog
+        </member>
+    </members>
+</doc>

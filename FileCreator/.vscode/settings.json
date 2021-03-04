@@ -1,0 +1,9 @@
+{
+    "git.ignoreLimitWarning": true,
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/7b118c31-8fe0-4a98-81d5-59a244c1bae4/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/BlogPagesBuilder14",
+    "appService.deploySubpath": "."
+}

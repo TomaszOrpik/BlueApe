@@ -1,0 +1,118 @@
+﻿@page "/"
+
+@inject HttpClient Http
+@inject IJSRuntime jsRuntime
+@inject NavigationManager _navMan
+@inject IBlogsManagerRepository _blogsRepo
+
+@using Newtonsoft.Json;
+
+@attribute [Authorize]
+
+<div class="container">
+    <div class="bodySquare" @onclick="NavigateToNewEditor">
+        <div class="square">
+            <div class="plusIcon">
+            </div>
+        </div>
+        <div class="addText">
+            CREATE NEW BLOG
+        </div>
+    </div>
+    @foreach (string blogName in blogs)
+    {
+        <div class="bodySquare" @onclick="args => NavigateToExistingPageEditor(blogName)">
+            <div class="square">
+                <div class="plusIcon">
+                </div>
+            </div>
+            <div class="addText">
+                @blogName.ToUpper();
+            </div>
+        </div>
+    }
+    <!--body square do każdego bloga po 5 break line + responsywność-->
+</div>
+
+<style>
+    .container {
+        margin-top: 10vh;
+    }
+
+    .bodySquare {
+        margin: 20px;
+        width: 250px;
+        height: 300px;
+    }
+
+    .square {
+        width: 250px;
+        height: 250px;
+        border: 2px dashed black;
+        background-color: #b3e5fc;
+        cursor: pointer;
+    }
+
+        .square:hover {
+            background-color: #4fc3f7;
+        }
+
+    .plusIcon {
+        width: 64px;
+        height: 64px;
+        margin: auto;
+        margin-top: 80px;
+        background: url("./Assets/Icons/iconfinder_plus_172525.png") no-repeat;
+    }
+
+    .addText {
+        Margin: 10px 0;
+        line-height: 30px;
+        text-align: center;
+        font-weight: 700;
+    }
+</style>
+
+@code {
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    private List<string> blogs = new List<string>();
+
+    private void NavigateToNewEditor()
+    {
+        _navMan.NavigateTo($"/blog-designer");
+    }
+    private void NavigateToExistingPageEditor(string name)
+    {
+        Console.WriteLine(name);
+        _navMan.NavigateTo($"/blog-editor/all/{name}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var authenticationState = await authenticationStateTask;
+        string userName = authenticationState.User.Identity.Name;
+        var response = await _blogsRepo.getUserBlogs(userName);
+        if (response.isSuccess)
+        {
+            UserBlogsResponse blogsResponse = JsonConvert.DeserializeObject<UserBlogsResponse>(response.content);
+            blogs = blogsResponse.blogNames.ToList();
+        }
+        ///get blogs from userName and display with screen as background
+    }
+
+
+    /// <summary>
+    /// to delete when finished
+    /// </summary>
+    string response = "Null";
+    async Task GetFile() ///download file test
+    {
+        ///if development connect to local host if prod to smarthost
+        string url = "http://sycho141.smarthost.pl/testName";
+        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+    }
+}

@@ -1,0 +1,380 @@
+﻿@page "/page-editor"
+@page "/page-editor/{Title}/{PageName}"
+
+@page "/post-editor"
+@page "/post-editor/{Title}"
+@page "/post-editor/{Title}/{PageName}"
+
+@inject IFileManagerRepository _fileRepo
+@inject IBlogsManagerRepository _blogsRepo
+@inject NavigationManager _navMan
+
+@using Newtonsoft.Json;
+@using Blazored.TextEditor
+
+<div class="navigation">
+    <NavMenu Title="@Title" />
+</div>
+
+@if (string.IsNullOrEmpty(Title))
+{
+    <h1 style="color: red">Incorrect Blog Name</h1>
+}
+else
+{
+    @if (!string.IsNullOrEmpty(model.imageUrl))
+    {
+        <BlogNav model="@blogModel" scale="2" activeButtons="@false" showTitle="@false"></BlogNav>
+        <img class="postImage" src="@model.imageUrl" />
+        <div class="postHeaders">
+            <h3 style="font-size: 35px; font-weight: 700; color: @(blogModel.primaryColor)">@(String.Join(", ", model.categories))</h3>
+            <h1 class="dynamicColor" style="font-size: 120px; font-weight: 700;">@model.title</h1>
+            <h3 class="dynamicColor" style="font-size: 25px; font-weight: 700;">Published @model.date</h3>
+        </div>
+    }
+    <div class="container">
+        <EditForm model="model" OnValidSubmit="@formSubmit">
+            <AlertMessage Message="@errorMessage" MessageType="@errorMessageType" />
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label class="blogCreatorLabel" for="pageTitle">Title</label>
+                <RadzenTextBox type="text" class="form-control" id="pageTitle" placeholder="Enter Page Title" @bind-value="model.title" Change="@(args => ValidatePageTitle(args))" Disabled="@(String.IsNullOrEmpty(PageName) ? false : true)"></RadzenTextBox>
+            </div>
+            <div class="form-group">
+                <label class="blogCreatorLabel" for="pageImage">Page Image</label>
+                <div class="form-control">
+                    Click to choose file...
+                    <InputFile class="fileInputHide" id="pageImage" placeholder="Image" OnChange="pageImageSend" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="blogCreatorLabel" for="pageCategories">Categories</label>
+                <RadzenTextArea class="form-control" id="pageCategories" placeholder="Enter Page Categories here, separated with comma..." Change=@(args => categoriesChanged(args)) Value="@String.Join(", ", model.categories)"></RadzenTextArea>
+            </div>
+            <div class="form-group">
+                <label class="blogCreatorLabel" for="pageIntro">Page Intro</label>
+                <RadzenTextArea class="form-control" id="pageIntro" placeholder="Enter Page Introduction here..." Change=@(args => this.model.intro = args) Value="@model.intro"></RadzenTextArea>
+            </div>
+            <BlazoredTextEditor @ref="@QuillHtml">
+                <ToolbarContent>
+                    <select class="ql-header">
+                        <option selected=""></option>
+                        <option value="1"></option>
+                        <option value="2"></option>
+                        <option value="3"></option>
+                        <option value="4"></option>
+                        <option value="5"></option>
+                    </select>
+                    <span class="ql-formats">
+                        <button class="ql-bold"></button>
+                        <button class="ql-italic"></button>
+                        <button class="ql-underline"></button>
+                        <button class="ql-strike"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <select class="ql-color"></select>
+                        <select class="ql-background"></select>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-list" value="ordered"></button>
+                        <button class="ql-list" value="bullet"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <button class="ql-link"></button>
+                    </span>
+                </ToolbarContent>
+                <EditorContent>
+                    <div>
+                        @model.content
+                    </div>
+                </EditorContent>
+            </BlazoredTextEditor>
+            @if (!string.IsNullOrEmpty(PageName))
+            {<RadzenButton ButtonType="Radzen.ButtonType.Button" Text="Delete" ButtonStyle="Radzen.ButtonStyle.Danger" class="btn-block mr-2" Click="onDeleteClick"></RadzenButton>}
+            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Submit" ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2"></RadzenButton>
+        </EditForm>
+    </div>
+    <BlogFooter></BlogFooter>
+}
+
+<style>
+    .container {
+        padding-bottom: 60px;
+    }
+    .postHeaders {
+        left: 80px;
+        margin-left: 25%;
+        width: 50%;
+        margin-top: -380px;
+        z-index: 10;
+    }
+    .pageHeader {
+        width: calc(100% - 60px);
+        padding-right: 60px;
+        height: 50%;
+        background: url( @model.imageUrl );
+    }
+    .form-group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .form-control.color {
+        width: 25%;
+    }
+
+    .fileInputHide {
+        opacity: 0;
+        width: 100%;
+        transform: translateY(-29px);
+    }
+
+    .blogCreatorLabel {
+        margin-top: 6px;
+        margin-right: 19px;
+        font-weight: 700;
+    }
+    .topBar, .bottomBar, .moveToFront {
+        left: 60px !important;
+        width: calc(100% - 60px) !important;
+        z-index: 10;
+    }
+    .postImage {
+        left: 60px;
+        width: calc(100% - 60px);
+        position: absolute;
+    }
+    .page {
+        flex-direction: column !important;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+    [Parameter]
+    public string PageName { get; set; }
+
+    private BlogSettings blogModel = new BlogSettings("", "", "", "", "", "",
+                                     new List<string>(), new List<string>(), "", "", "");
+    private BlogData data;
+    Page model = new Page
+    (
+        "Your first post",
+        "./Assets/bg-5example.jpg",
+        new string[2] { "FirstPost", "TestPost" },
+        "01/01/2021",
+        "Here is example post to learn whole structure...",
+        Placeholders.dummyText
+    );
+    BlazoredTextEditor QuillHtml;
+    private string errorMessage = string.Empty;
+    Models.AlertMessageTypes errorMessageType = Models.AlertMessageTypes.Success;
+
+    protected async override Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var blogResult = await _blogsRepo.getBlogData(Title);
+        data = JsonConvert.DeserializeObject<BlogData>(blogResult.content);
+        List<string> currentPages = new List<string>();
+        foreach (PageData page in data.BlogDocument.Pages) currentPages.Add(page.Title);
+        blogModel = new BlogSettings
+        (
+            data.BlogDocument.BlogDetails.Title,
+            data.BlogDocument.BlogDetails.LogoUrl,
+            data.BlogDocument.BlogDetails.Description,
+            data.BlogDocument.BlogDetails.PrimaryColor,
+            data.BlogDocument.BlogDetails.SecondaryColor,
+            data.BlogDocument.BlogDetails.BackgroundColor,
+            data.BlogDocument.Categories.ToList(),
+            currentPages.ToList(),
+            data.BlogDocument.BlogDetails.FacebookLink,
+            data.BlogDocument.BlogDetails.InstagramLink,
+            data.BlogDocument.BlogDetails.TwitterLink
+        );
+        if (!string.IsNullOrEmpty(PageName))
+        {
+            ///here to check if page and than display page data not post
+            bool isPost = this.CheckIfIsPost();
+            ResponseModel result;
+            if (isPost)
+            {
+                result = await _blogsRepo.getPost(Title, PageName);
+            }
+            else
+            {
+                result = null; /// result get page data
+            }
+            if (result.isSuccess)
+            {
+                PageData body = JsonConvert.DeserializeObject<PageData>(result.content);
+                model = new Page
+                (
+                    body.Title,
+                    body.ImageUrl,
+                    body.Categories,
+                    body.Date,
+                    body.Intro,
+                    body.Content
+                );
+                await this.QuillHtml.LoadHTMLContent(body.Content);
+                StateHasChanged();
+            }
+            else
+            {
+                errorMessage = result.message;
+                errorMessageType = Models.AlertMessageTypes.Error;
+            }
+        }
+    }
+    private async Task onDeleteClick()
+    {
+        ///check if page or post and run different delete
+        var response = await _blogsRepo.deletePost(Title, model.title);
+        if (!response.isSuccess)
+        {
+            errorMessage = response.message;
+            errorMessageType = Models.AlertMessageTypes.Error;
+        }
+        else
+        {
+            string[] url = model.imageUrl.Split('/');
+            try
+            {
+                await _fileRepo.DeleteImage(url[url.Length - 1]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
+            }
+        }
+    }
+    private async Task formSubmit()
+    {
+        bool isPost = this.CheckIfIsPost();
+        string content = await this.QuillHtml.GetHTML();
+        PageData pageData = new PageData
+        {
+            Title = model.title,
+            ImageUrl = model.imageUrl,
+            Categories = model.categories,
+            Date = model.date,
+            Intro = model.intro,
+            Content = content
+        };
+        var postsList = data.BlogDocument.Posts.ToList();
+        var pagesList = data.BlogDocument.Pages.ToList();
+
+        if (string.IsNullOrEmpty(PageName))
+        {
+            postsList.Add(pageData);
+            data.BlogDocument.Posts = postsList.ToArray();
+
+            var response = await _blogsRepo.addPost(data);
+            if (!response.isSuccess)
+            {
+                errorMessage = response.message;
+                errorMessageType = Models.AlertMessageTypes.Error;
+            }
+            else _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
+        }
+        else
+        {
+            if (isPost)
+            {
+                int index = postsList.FindIndex(el => el.Title == model.title);
+                postsList[index] = pageData;
+                data.BlogDocument.Posts = postsList.ToArray();
+                var response = await _blogsRepo.updatePost(data);
+                if (!response.isSuccess)
+                {
+                    errorMessage = response.message;
+                    errorMessageType = Models.AlertMessageTypes.Error;
+                }
+                else _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
+            }
+            else
+            {
+                int pageIndex = pagesList.FindIndex(el => el.Title == model.title);
+                pagesList[pageIndex] = pageData;
+                data.BlogDocument.Pages = pagesList.ToArray();
+                var response = await _blogsRepo.updatePost(data);
+                if (!response.isSuccess)
+                {
+                    errorMessage = response.message;
+                    errorMessageType = Models.AlertMessageTypes.Error;
+                }
+                else _navMan.NavigateTo($"/blog-editor/all/{blogModel.title}");
+            }
+        }
+    }
+    private async Task pageImageSend(InputFileChangeEventArgs e)
+    {
+        var maxAllowedFiles = 1;
+        var format = "image/jpg";
+        var file = e.GetMultipleFiles(maxAllowedFiles)[0];
+        if (file.ContentType != format)
+        {
+            errorMessage = "File isn't in jpg format";
+            errorMessageType = Models.AlertMessageTypes.Warning;
+            return;
+        }
+        var result = await _fileRepo.UploadImage(e.GetMultipleFiles(maxAllowedFiles)[0], format);
+        if (result.isSuccess)
+        {
+            errorMessage = result.message;
+            errorMessageType = Models.AlertMessageTypes.Success;
+            model.imageUrl = result.content;
+            return;
+        }
+        else
+        {
+            errorMessage = result.message;
+            errorMessageType = Models.AlertMessageTypes.Error;
+            return;
+        }
+    }
+    private async void ValidatePageTitle(string value)
+    {
+        var result = await _blogsRepo.lookForPost(blogModel.title, value);
+        if (result.isSuccess)
+        {
+            if (result.content == "false" || string.IsNullOrWhiteSpace(value))
+            {
+                errorMessage = "Name Taken";
+                errorMessageType = Models.AlertMessageTypes.Warning;
+                return;
+            }
+            else
+            {
+                errorMessage = "Name valid";
+                errorMessageType = Models.AlertMessageTypes.Success;
+                return;
+            }
+        }
+        else
+        {
+            errorMessage = result.message;
+            errorMessageType = Models.AlertMessageTypes.Error;
+            return;
+        }
+    }
+    private void categoriesChanged(string value)
+    {
+        List<string> categories = value.Split(",").ToList();
+        this.model.categories = categories.ToArray();
+    }
+
+    private bool CheckIfIsPost()
+    {
+        string[] uri = _navMan.Uri.Split('/');
+        if (uri[3] == "page-editor") return false;
+        else return true;
+    }
+}
+

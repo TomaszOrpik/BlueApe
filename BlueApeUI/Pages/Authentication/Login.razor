@@ -1,0 +1,63 @@
+﻿@page "/login"
+
+@layout AuthLayout
+@using Models.Users.Requests
+
+@inject IAuthenticationRepository _authRepo
+@inject NavigationManager _navMan
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="cardTitle">Login to Your Account</h2>
+        <EditForm Model="model" OnValidSubmit="LoginUser">
+            <RadzenCard class="clearBorder">
+                <AlertMessage Message="@message" MessageType="@messageType" />
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <label>Email</label>
+                <RadzenTextBox @bind-Value="model.Email"></RadzenTextBox>
+                <label>Password</label>
+                <RadzenPassword @bind-Value="model.Password"></RadzenPassword>
+                <hr />
+                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Login"
+                              ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2"
+                              Disabled="isBusy"></RadzenButton>
+                <RadzenButton ButtonType="Radzen.ButtonType.Button" Text="Register"
+                              ButtonStyle="Radzen.ButtonStyle.Secondary" class="btn-block mr-2"
+                              Disabled="isBusy" Click="GoToRegister"></RadzenButton>
+            </RadzenCard>
+
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    LoginEntity model = new LoginEntity();
+
+    bool isBusy = false;
+    string message = string.Empty;
+    Models.AlertMessageTypes messageType = Models.AlertMessageTypes.Success;
+    public async Task LoginUser()
+    {
+        isBusy = true;
+        var result = await _authRepo.Login(model);
+        if (result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            message = "User Logged Successfully";
+            messageType = Models.AlertMessageTypes.Success;
+
+            _navMan.NavigateTo("/");
+        }
+        else
+        {
+            message = result.Token;
+            messageType = Models.AlertMessageTypes.Error;
+        }
+        isBusy = false;
+    }
+
+    void GoToRegister()
+    {
+        _navMan.NavigateTo("/register");
+    }
+}
