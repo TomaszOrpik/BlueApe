@@ -3,13 +3,9 @@ const bodyParser = require('body-parser');
 const { exec } = require('pkg');
 const path = require('path');
 const fs = require('fs');
-const { response } = require('express');
 const cors = require('cors');
 const app = express();
 const jsonParser = bodyParser.json();
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-const base64Img = require('base64-img');
-const multer = require('multer');
 const { RSA_NO_PADDING } = require('constants');
 const port = 9000;
 const fileupload = require('express-fileupload');
@@ -43,6 +39,7 @@ app.use(express.static(__dirname));
 
 ///add create file function that will draw whole Page from database Creator
 app.get('/', function (req, res) {
+  //in body goes collection and type of blog (static/dynamic)
   res.sendFile(__dirname + '/index.html')
 });
 

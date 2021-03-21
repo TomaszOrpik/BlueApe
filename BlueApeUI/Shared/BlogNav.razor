@@ -1,13 +1,13 @@
 ﻿@inject NavigationManager _navMan
 
-<div class="topBar">
-    <div class="leftSide">
-        <div class="logo">
-            <img src=@model.logoUrl height=@(scale*35) />
+<div class=@("topBar"+classUnique)>
+    <div class=@("leftSide"+classUnique)>
+        <div class=@("logo"+classUnique)>
+            <img src=@model.logoUrl height=@(scale*17) />
         </div>
         @for (int j = 0; j < model.pages.Count() && j <= 7; j++)
         {
-            <div class="pageLink">
+            <div class=@("pageLink"+classUnique)>
                 <a href=@($"/page-editor/{model.title}/{model.pages[j]}")>
                     @model.pages[j]
                 </a>
@@ -15,32 +15,32 @@
         }
     </div>
 
-    <div class="rightSide">
-        <div class="iconBox">
+    <div class=@("rightSide"+classUnique)>
+        <div class=@("iconBox"+classUnique)>
             <img src="./Assets/Icons/instagram.svg"
-                 height=@(scale*35)
-                 width=@(scale*15) />
+                 height=@(scale*17)
+                 width=@(scale*7) />
         </div>
-        <div class="iconBox">
+        <div class=@("iconBox"+classUnique)>
             <img src="./Assets/Icons/twitter.svg"
-                 height=@(scale*35)
-                 width=@(scale*15) />
+                 height=@(scale*17)
+                 width=@(scale*7) />
         </div>
-        <div class="iconBox">
+        <div class=@("iconBox"+classUnique)>
             <img src="./Assets/Icons/facebook-app-symbol.svg"
-                 height=@(scale*35)
-                 width=@(scale*15) />
+                 height=@(scale*17)
+                 width=@(scale*7) />
         </div>
     </div>
 </div>
-<div class="bottomBar">
-    <div class="title">
+<div class=@("bottomBar"+classUnique)>
+    <div class=@("title"+classUnique)>
         @model.title
     </div>
-    <div class="categoryContainer">
+    <div class=@("categoryContainer"+classUnique)>
         @for (int i = 0; i < model.categories.Count() && i <= 7; i++)
         {
-            <div class="catBox">
+            <div class=@("catBox"+classUnique)>
                 <span>@model.categories[i]</span>
             </div>
         }
@@ -49,124 +49,124 @@
 
 @if (!showTitle)
 {
-    <style>
-        .title {
+<style>
+        .title@(classUnique) {
             display: none !important;
         }
 
-        .categoryContainer {
+        .categoryContainer@(classUnique) {
             top: 0 !important;
         }
-    </style>
+</style>
 }
 
 <style>
-      .topBar {
+      .topBar@(classUnique) {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: @(Convert.ToString(scale*36)+"px");
+        height: @(Convert.ToString(scale*17)+"px");
         background-color: @model.backgroundColor;
         display: flex;
         flex-direction: row;
         border-bottom: 1px solid #e8e8e8;
     }
-    .bottomBar {
-        height: @(Convert.ToString(scale*125)+"px");
+    .bottomBar@(classUnique) {
+        height: @(Convert.ToString(scale*60)+"px");
         width: 100%;
         position: absolute;
-        top: @(Convert.ToString(scale*36)+"px");
+        top: @(Convert.ToString(scale*17)+"px");
         left: 0;
         background: linear-gradient(0deg, rgba(0,0,0,0) 0%, @model.backgroundColor 99%);
     }
-    .categoryContainer {
+    .categoryContainer@(classUnique) {
         position: absolute;
-        top: @(Convert.ToString(scale * 75)+"px");
+        top: @(Convert.ToString(scale * 37)+"px");
         left: 0;
         width: 100%;
-        height: @(Convert.ToString(scale * 50)+"px");
+        height: @(Convert.ToString(scale * 25)+"px");
         text-align: center;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
     }
-    .catBox {
-        margin: 0 @(Convert.ToString(scale * 10)+"px");
-        font-size: @(Convert.ToString(scale * 11)+"px");
+    .catBox@(classUnique) {
+        margin: 0 @(Convert.ToString(scale * 5)+"px");
+        font-size: @(Convert.ToString(scale * 6)+"px");
         font-weight: 700;
         color: @model.secondaryColor;
         cursor: pointer;
     }
-    .catBox:hover {
+    .catBox:hover@(classUnique) {
         color: @model.primaryColor;
     }
-    .title {
+    .title@(classUnique) {
         position: absolute;
-        top: @(Convert.ToString(scale * 30)+"px");
+        top: @(Convert.ToString(scale * 15)+"px");
         width: 100%;
         color: @model.secondaryColor;
         font-family: 'Dancing Script', cursive;
-        font-size: @(Convert.ToString(scale * 32)+"px");
+        font-size: @(Convert.ToString(scale * 16)+"px");
         text-align: center;
         cursor: default;
         font-weight: 900;
     }
-    .leftSide {
-        width: calc(100% - @(Convert.ToString(scale * 75)+"px"));
+    .leftSide@(classUnique) {
+        width: calc(100% - @(Convert.ToString(scale * 37)+"px"));
         display: flex;
         flex-direction: row;
     }
-    .rightSide {
-        width: @(Convert.ToString(scale * 75)+"px");
+    .rightSide@(classUnique) {
+        width: @(Convert.ToString(scale * 37)+"px");
         display: flex;
         flex-direction: row;
     }
-    .logo {
+    .logo@(classUnique) {
         width: auto;
-        height: @(Convert.ToString(scale * 35)+"px");
+        height: @(Convert.ToString(scale * 17)+"px");
         cursor: pointer;
     }
-    .logo:hover {
+    .logo@(classUnique):hover {
         background: rgb(168,168,168);
         background: @model.secondaryColor;
 
     }
-    .pageLink {
-        font-size: @(Convert.ToString(scale * 9)+"px");
+    .pageLink@(classUnique) {
+        font-size: @(Convert.ToString(scale * 5)+"px");
         font-weight: 700;
-        line-height: @(Convert.ToString(scale * 35)+"px");
+        line-height: @(Convert.ToString(scale * 17)+"px");
         text-align: center;
-        padding-right: @(Convert.ToString(scale * 5)+"px");
-        padding-left: @(Convert.ToString(scale * 5)+"px");
+        padding-right: @(Convert.ToString(scale * 2)+"px");
+        padding-left: @(Convert.ToString(scale * 2)+"px");
         cursor: pointer;
         color: white;
     }
-    .pageLink:hover {
+    .pageLink@(classUnique):hover {
         background: rgb(168,168,168);
         background: @model.secondaryColor;
     }
-    .customA {
+    .customA@(classUnique) {
         color: #fff;
         text-decoration: none;
     }
-    .customA:hover {
+    .customA@(classUnique):hover {
         background: rgb(168,168,168);
         background: @model.secondaryColor;
     }
-    .iconBox {
+    .iconBox@(classUnique) {
         position: relative;
-        width: @(Convert.ToString(scale * 25)+"px");
+        width: @(Convert.ToString(scale * 12)+"px");
         color: white;
         cursor: pointer;
     }
-    .iconBox:hover {
+    .iconBox@(classUnique):hover {
         background: rgb(168,168,168);
         background: @model.secondaryColor;
     }
-    .iconBox > img {
-       left: @(Convert.ToString(scale * 5)+"px");
+    .iconBox@(classUnique) > img {
+       left: @(Convert.ToString(scale * 2)+"px");
         position: absolute;
     }
     a, a:hover {
@@ -184,6 +184,8 @@
     public bool activeButtons { get; set; }
     [Parameter]
     public bool showTitle { get; set; }
+
+    protected string classUnique = PasswordUtilities.CreatePassword(6);
 
     protected void NavigateToPage(string pageName)
     {

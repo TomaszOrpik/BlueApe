@@ -1,34 +1,36 @@
-﻿<div class="containerBody">
+﻿<div class=@("containerBody"+uniqueClass)>
     @for (int p = 0; p < _posts.Count(); p++)
     {
         if (_isActive)
         {
-            <div class="bodySquare">
-                <div class="squareBase normalCursor row">
+            <div class=@("bodySquare"+uniqueClass)>
+                <div class=@($"squareBase{uniqueClass} normalCursor{uniqueClass} row")>
                     <div class="left col-6">
                         <a href=@($"/post-editor/{_title}/{_posts[p].Title}")>
                             <img style="width: 100%" src="@_posts[p].ImageUrl" />
                         </a>
                     </div>
                     <div class="right col-6">
-                        <a class="blackFont" href=@($"/post-editor/{_title}/{_posts[p].Title}")><h1>@_posts[p].Title</h1></a>
-                        <span>@_posts[p].Intro</span>
-                        <h3>Posted @_posts[p].Date</h3>
+                        <a class=@("blackFont"+uniqueClass) href=@($"/post-editor/{_title}/{_posts[p].Title}")>
+                            <h1 class=@("bigString"+uniqueClass)>@_posts[p].Title</h1>
+                        </a>
+                        <span class=@("postSpan"+uniqueClass)>@_posts[p].Intro</span>
+                        <h3 class=@("smallString"+uniqueClass)>Posted @_posts[p].Date</h3>
                     </div>
                 </div>
             </div>
         }
         else
         {
-            <div class="bodySquare">
-                <div class="squareBase normalCursor row">
+            <div class=@("bodySquare"+uniqueClass)>
+                <div class=@($"squareBase{uniqueClass} normalCursor{uniqueClass} row")>
                     <div class="left col-6">
                             <img style="width: 100%" src="@_posts[p].ImageUrl" />
                     </div>
                     <div class="right col-6">
-                        <h1>@_posts[p].Title</h1>
-                        <span>@_posts[p].Intro</span>
-                        <h3>Posted @_posts[p].Date</h3>
+                        <h1 class=@("bigString"+uniqueClass)>@_posts[p].Title</h1>
+                        <span class=@("postSpan"+uniqueClass)>@_posts[p].Intro</span>
+                        <h3 class=@("smallString"+uniqueClass)>Posted @_posts[p].Date</h3>
                     </div>
                 </div>
             </div>
@@ -39,32 +41,32 @@
 </div>
 
 <style>
-    h1 {
-        font-size: @((_scale*20).ToString()+"px");
+    .bigString@(uniqueClass) {
+        font-size: @((_scale*10).ToString()+"px");
     }
-    span {
-        font-size: @((_scale*13).ToString()+"px")
+    .postSpan@(uniqueClass) {
+        font-size: @((_scale*7).ToString()+"px")
     }
-    h3 {
-        font-size: @((_scale*12).ToString()+"px")
+    .smallString@(uniqueClass) {
+        font-size: @((_scale*6).ToString()+"px")
     }
-    .containerBody {
+    .containerBody@(uniqueClass) {
         width: 100%;
     }
 
-    .bodySquare {
+    .bodySquare@(uniqueClass) {
         width: 75%;
-        height: @((_scale*150).ToString()+"px");
+        height: @((_scale*75).ToString()+"px");
     }
 
-    .squareBase {
+    .squareBase@(uniqueClass) {
         width: 125%;
         height: 250px;
     }
-    .normalCursor {
+    .normalCursor@(uniqueClass) {
         cursor: default !important;
     }
-    .blackFont, .blackFont:hover {
+    .blackFont@(uniqueClass), .blackFont@(uniqueClass):hover {
         color: black;
         font-weight: 700;
     }
@@ -79,6 +81,8 @@
     public string title { get; set; }
     [Parameter]
     public int scale { get; set; }
+
+    private string uniqueClass = PasswordUtilities.CreatePassword(6);
 
     private List<PageData> _posts = new List<PageData>();
     private bool _isActive = false;

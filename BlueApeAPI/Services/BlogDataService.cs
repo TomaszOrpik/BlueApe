@@ -95,7 +95,7 @@ namespace BlueApeAPI.Services
         // update existing post
         public void UpdatePost(BlogData data)
         {
-            var update = Builders<BlogData>.Update.Set("BlogDocument", data);
+            var update = Builders<BlogData>.Update.Set("BlogDocument", data.BlogDocument);
             _database.GetCollection<BlogData>(data.BlogDocument.BlogDetails.Title).UpdateOne(data => true, update);
         }
         // delete post

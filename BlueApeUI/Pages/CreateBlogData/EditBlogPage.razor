@@ -14,7 +14,7 @@
 </div>
 
 <div class="moveRight">
-    <BlogNav model="@blogModel" scale="2" activeButtons="@true"></BlogNav>
+    <BlogNav model="@blogModel" scale="4" activeButtons="@true"></BlogNav>
 </div>
 <div class="container">
     <div class="bodySquare" @onclick="OpenNewPostPage">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <BlogPosts posts="@displayedPosts" isActive="@true" title="@title" scale="2"></BlogPosts>
+    <BlogPosts posts="@displayedPosts" isActive="@true" title="@title" scale="4"></BlogPosts>
     <div class="row">
 
             @for (int x = 0; x <= subPages; x++)

@@ -49,25 +49,5 @@ namespace BlueApeAPI.Services
             if (blogsList != null) return true;
             else return false;
         }
-
-        public PageData GetPage(string blogName, string pageName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void AddPage(string blogName, PageData page)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdatePage(string blogName, PageData page)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void DeletePage(string blogName, string pageName)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zZcIa8SQjo4vcNU5h+IyggcTHQiHMS0DB774S0SnoWJGI70ykrKm0oP9U6pz7/KMbqPOGnf1321ki3pNFZgElA==",
+  "dgSpecHash": "9bZxktW9Iky3FRyRX3+wZ+dxkstOWf04raFd6FFnCHi5o1BhWUobZ4R009O+flffQOwBJhqYRpqOQlhAPixixw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
+  "projectFilePath": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeUI\\BlueApeUI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sycho\\.nuget\\packages\\blazored.localstorage\\3.0.0\\blazored.localstorage.3.0.0.nupkg.sha512",
     "C:\\Users\\sycho\\.nuget\\packages\\blazored.texteditor\\1.0.3\\blazored.texteditor.1.0.3.nupkg.sha512",
@@ -57,7 +57,7 @@
     "C:\\Users\\sycho\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512",
     "C:\\Users\\sycho\\.nuget\\packages\\tewr.blazor.filereader\\3.0.0.20340\\tewr.blazor.filereader.3.0.0.20340.nupkg.sha512",
     "C:\\Users\\sycho\\.nuget\\packages\\tewr.blazor.filereader.wasm\\0.11.19128\\tewr.blazor.filereader.wasm.0.11.19128.nupkg.sha512",
-    "C:\\Users\\sycho\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.3\\microsoft.netcore.app.runtime.browser-wasm.5.0.3.nupkg.sha512"
+    "C:\\Users\\sycho\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.4\\microsoft.netcore.app.runtime.browser-wasm.5.0.4.nupkg.sha512"
   ],
   "logs": []
 }

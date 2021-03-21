@@ -9252,24 +9252,25 @@
   },
   "packageFolders": {
     "C:\\Users\\sycho\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
+      "projectUniqueName": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
       "projectName": "BlueApeAPI",
-      "projectPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
+      "projectPath": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
       "packagesPath": "C:\\Users\\sycho\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\obj\\",
+      "outputPath": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
         "C:\\Users\\sycho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -9371,7 +9372,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -9380,7 +9381,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.Azure.AppService.ApiApps.Service 0.9.64' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.Azure.AppService.ApiApps.Service 0.9.64” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8” zamiast platformy docelowej projektu „net5.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.Azure.AppService.ApiApps.Service",
       "targetGraphs": [
         "net5.0"

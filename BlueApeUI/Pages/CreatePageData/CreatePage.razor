@@ -24,7 +24,9 @@ else
 {
     @if (!string.IsNullOrEmpty(model.imageUrl))
     {
-        <BlogNav model="@blogModel" scale="2" activeButtons="@false" showTitle="@false"></BlogNav>
+        <div class="moveRight">
+            <BlogNav model="@blogModel" scale="4" activeButtons="@true"></BlogNav>
+        </div>
         <img class="postImage" src="@model.imageUrl" />
         <div class="postHeaders">
             <h3 style="font-size: 35px; font-weight: 700; color: @(blogModel.primaryColor)">@(String.Join(", ", model.categories))</h3>
@@ -95,7 +97,9 @@ else
             <RadzenButton ButtonType="Radzen.ButtonType.Submit" Text="Submit" ButtonStyle="Radzen.ButtonStyle.Primary" class="btn-block mr-2"></RadzenButton>
         </EditForm>
     </div>
-    <BlogFooter></BlogFooter>
+    <div class="moveRight">
+        <BlogFooter></BlogFooter>
+    </div>
 }
 
 <style>
@@ -135,11 +139,6 @@ else
         margin-right: 19px;
         font-weight: 700;
     }
-    .topBar, .bottomBar, .moveToFront {
-        left: 60px !important;
-        width: calc(100% - 60px) !important;
-        z-index: 10;
-    }
     .postImage {
         left: 60px;
         width: calc(100% - 60px);
@@ -147,6 +146,13 @@ else
     }
     .page {
         flex-direction: column !important;
+    }
+    .moveRight {
+        position: absolute;
+        top: 0;
+        left: 60px;
+        width: calc(100% - 60px);
+        z-index: 10;
     }
 </style>
 
@@ -164,7 +170,7 @@ else
         "Your first post",
         "./Assets/bg-5example.jpg",
         new string[2] { "FirstPost", "TestPost" },
-        "01/01/2021",
+        DateTime.UtcNow.ToString("dd/MM/yyyy"),
         "Here is example post to learn whole structure...",
         Placeholders.dummyText
     );

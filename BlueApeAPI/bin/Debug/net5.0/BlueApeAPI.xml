@@ -100,62 +100,6 @@
             <param name="pageName"></param>
             <returns></returns>
         </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Index">
-            <summary>
-            GET: HomeController
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Details(System.Int32)">
-            <summary>
-            GET: HomeController/Details/5
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.TestDownload">
-            <summary>
-            GET: HomeController/Create
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Create(Microsoft.AspNetCore.Http.IFormCollection)">
-            <summary>
-            POST: HomeController/Create
-            </summary>
-            <param name="collection"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Edit(System.Int32)">
-            <summary>
-            GET: HomeController/Edit/5
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Edit(System.Int32,Microsoft.AspNetCore.Http.IFormCollection)">
-            <summary>
-            POST: HomeController/Edit/5
-            </summary>
-            <param name="id"></param>
-            <param name="collection"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Delete(System.Int32)">
-            <summary>
-            GET: HomeController/Delete/5
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:BlueApeAPI.Controllers.HomeController.Delete(System.Int32,Microsoft.AspNetCore.Http.IFormCollection)">
-            <summary>
-            POST: HomeController/Delete/5
-            </summary>
-            <param name="id"></param>
-            <param name="collection"></param>
-            <returns></returns>
-        </member>
         <member name="M:BlueApeAPI.Controllers.UsersController.UserData">
             <summary>
             GET userData

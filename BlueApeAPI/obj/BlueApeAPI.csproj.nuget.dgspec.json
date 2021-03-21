@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj": {}
+    "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj": {
+    "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
+        "projectUniqueName": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
         "projectName": "BlueApeAPI",
-        "projectPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
+        "projectPath": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\BlueApeAPI.csproj",
         "packagesPath": "C:\\Users\\sycho\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\sycho\\OneDrive\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\obj\\",
+        "outputPath": "C:\\Users\\sycho\\Desktop\\GitHub\\BlueApe\\BlueApeAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
           "C:\\Users\\sycho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -120,7 +121,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
