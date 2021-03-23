@@ -435,3 +435,11 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+# VS BIN
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages

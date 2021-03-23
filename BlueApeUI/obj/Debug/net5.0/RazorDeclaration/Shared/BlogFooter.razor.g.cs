@@ -173,6 +173,15 @@ using BlueApeUI.Utilities;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 22 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogFooter.razor"
+       
+    [Parameter]
+    public int scale { get; set; }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

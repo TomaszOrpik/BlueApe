@@ -1,7 +1,5 @@
 ﻿@page "/"
 
-@inject HttpClient Http
-@inject IJSRuntime jsRuntime
 @inject NavigationManager _navMan
 @inject IBlogsManagerRepository _blogsRepo
 
@@ -9,32 +7,38 @@
 
 @attribute [Authorize]
 
+<UserStatus></UserStatus>
+
 <div class="container">
-    <div class="bodySquare" @onclick="NavigateToNewEditor">
-        <div class="square">
-            <div class="plusIcon">
-            </div>
-        </div>
-        <div class="addText">
-            CREATE NEW BLOG
-        </div>
-    </div>
-    @foreach (string blogName in blogs)
-    {
-        <div class="bodySquare" @onclick="args => NavigateToExistingPageEditor(blogName)">
+    <div class="row">
+        <div class="bodySquare" @onclick="NavigateToNewEditor">
             <div class="square">
                 <div class="plusIcon">
                 </div>
             </div>
             <div class="addText">
-                @blogName.ToUpper();
+                CREATE NEW BLOG
             </div>
         </div>
-    }
-    <!--body square do każdego bloga po 5 break line + responsywność-->
+        @foreach (KeyValuePair<BlogSettings, PageData[]> blog in blogs)
+        {
+    <div class="bodySquare blogWindow" @onclick="args => NavigateToExistingPageEditor(blog.Key.title)">
+            <div>
+                <BlogNav model="@blog.Key" scale="1" activeButtons="@false" showTitle="@true"></BlogNav>
+            </div>
+            <div class="customContainer">
+                <BlogPosts posts="@blog.Value" scale="1" isActive="@false" title="@blog.Key.title"></BlogPosts>
+            </div>
+            <BlogFooter scale="1"></BlogFooter>
+        </div>
+        }
+    </div>
 </div>
 
 <style>
+    .logoutBtn {
+        top: 10px !important;
+    }
     .container {
         margin-top: 10vh;
     }
@@ -49,12 +53,12 @@
         width: 250px;
         height: 250px;
         border: 2px dashed black;
-        background-color: #b3e5fc;
+        background-color: dodgerblue;
         cursor: pointer;
     }
 
         .square:hover {
-            background-color: #4fc3f7;
+            background-color: #61affe;
         }
 
     .plusIcon {
@@ -71,6 +75,20 @@
         text-align: center;
         font-weight: 700;
     }
+    .customContainer {
+        width: 100%;
+        height: 85vh;
+        overflow-y: hidden;
+        padding-top: 90px;
+        padding-left: 60px;
+    }
+    .bodySquare.blogWindow {
+        margin-left: 50px;
+        width: 200px;
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+    }
 </style>
 
 @code {
@@ -78,7 +96,7 @@
     [CascadingParameter]
     public Task<AuthenticationState> authenticationStateTask { get; set; }
 
-    private List<string> blogs = new List<string>();
+    private Dictionary<BlogSettings, PageData[]> blogs = new Dictionary<BlogSettings, PageData[]>();
 
     private void NavigateToNewEditor()
     {
@@ -99,20 +117,34 @@
         if (response.isSuccess)
         {
             UserBlogsResponse blogsResponse = JsonConvert.DeserializeObject<UserBlogsResponse>(response.content);
-            blogs = blogsResponse.blogNames.ToList();
+            string[] blogs = blogsResponse.blogNames;
+            foreach(string blog in blogs)
+            {
+                var blogResult = await _blogsRepo.getBlogData(blog);
+                if (blogResult.isSuccess)
+                {
+
+                    BlogData data = JsonConvert.DeserializeObject<BlogData>(blogResult.content);
+                    PageData[] posts = data.BlogDocument.Posts;
+                    List<string> pageTitles = new List<string>();
+                    foreach (PageData page in data.BlogDocument.Pages)
+                        pageTitles.Add(page.Title);
+                    BlogSettings settings = new BlogSettings(
+                        data.BlogDocument.BlogDetails.Title,
+                        data.BlogDocument.BlogDetails.LogoUrl,
+                        data.BlogDocument.BlogDetails.Description,
+                        data.BlogDocument.BlogDetails.PrimaryColor,
+                        data.BlogDocument.BlogDetails.SecondaryColor,
+                        data.BlogDocument.BlogDetails.BackgroundColor,
+                        data.BlogDocument.Categories.ToList(),
+                        pageTitles,
+                        data.BlogDocument.BlogDetails.FacebookLink,
+                        data.BlogDocument.BlogDetails.InstagramLink,
+                        data.BlogDocument.BlogDetails.TwitterLink
+                    );
+                    this.blogs.Add(settings, posts);
+                }
+            }
         }
-        ///get blogs from userName and display with screen as background
-    }
-
-
-    /// <summary>
-    /// to delete when finished
-    /// </summary>
-    string response = "Null";
-    async Task GetFile() ///download file test
-    {
-        ///if development connect to local host if prod to smarthost
-        string url = "http://sycho141.smarthost.pl/testName";
-        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
     }
 }

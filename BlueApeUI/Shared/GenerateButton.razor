@@ -1,0 +1,97 @@
+﻿@inject IJSRuntime jsRuntime
+@inject IFileManagerRepository _fileRepo
+
+
+<AuthorizeView>
+    <RadzenButton ButtonType="Radzen.ButtonType.Submit" ButtonStyle="Radzen.ButtonStyle.Primary" Text="Generate Blog Data" Click="openPopup" class="mr-2 generateBtn primary"></RadzenButton>
+</AuthorizeView>
+
+@if (showPopup)
+{
+    <div class="modal" tabindex="-1" style="display:block" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Select Generated Data Type</h3>
+                    <button type="button" class="close"
+                            @onclick="closePopup">
+                        <span aria-hidden="true">X</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <RadzenButton ButtonType="Radzen.ButtonType.Submit" ButtonStyle="Radzen.ButtonStyle.Primary" Text="Generate Configuration JSON" Click="getJson" class="mr-2 generateBtn BtnModal"></RadzenButton>
+                    <RadzenButton ButtonType="Radzen.ButtonType.Submit" ButtonStyle="Radzen.ButtonStyle.Primary" Text="Generate Static Website" Click="getStaticWebsite" class="mr-2 generateBtn BtnModal"></RadzenButton>
+                    <RadzenButton ButtonType="Radzen.ButtonType.Submit" ButtonStyle="Radzen.ButtonStyle.Primary" Text="Generate Dynamic Website" Click="getDynamicWebsite" class="mr-2 generateBtn BtnModal"></RadzenButton>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .generateBtn {
+        background-color: #2f2f2f !important;
+        width: 250px;
+        margin-left: calc(50% - 125px);
+        border-radius: 15px;
+        font-size: 23px;
+    }
+
+        .generateBtn.BtnModal {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 125px;
+        }
+
+        .generateBtn.primary {
+            position: absolute;
+            height: 100px;
+            bottom: 100px;
+            z-index: 300;
+        }
+
+        .generateBtn:hover {
+            background-color: lightgray !important;
+        }
+</style>
+
+@code {
+
+    [Parameter]
+    public BlogData blogData { get; set; }
+
+    private bool showPopup = false;
+
+    protected void openPopup()
+    {
+        showPopup = true;
+    }
+    protected void closePopup()
+    {
+        showPopup = false;
+    }
+    protected async void getJson()
+    {
+        string baseUrl = _fileRepo.GenerateUrl();
+        Console.WriteLine(baseUrl);
+        string url = $"{baseUrl}config/{blogData.BlogDocument.BlogDetails.Title}";
+        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+        showPopup = false;
+    }
+    protected async void getStaticWebsite()
+    {
+        string baseUrl = _fileRepo.GenerateUrl();
+        Console.WriteLine(baseUrl);
+        string url = $"{baseUrl}staticPage/{blogData.BlogDocument.BlogDetails.Title}";
+        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+        showPopup = false;
+    }
+    protected async void getDynamicWebsite()
+    {
+        string baseUrl = _fileRepo.GenerateUrl();
+        Console.WriteLine(baseUrl);
+        string url = $"{baseUrl}dynamicPage/{blogData.BlogDocument.BlogDetails.Title}";
+        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
+        showPopup = false;
+    }
+}

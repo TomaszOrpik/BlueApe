@@ -13,5 +13,6 @@ namespace BlueApeUI.Contracts
         public Task<ResponseModel> DeleteLogo(string fileName);
         public Task<ResponseModel> UploadImage(IBrowserFile file, string format);
         public Task<ResponseModel> DeleteImage(string fileName);
+        public string GenerateUrl();
     }
 }

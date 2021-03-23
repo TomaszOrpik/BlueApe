@@ -1452,8 +1452,9 @@ C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\RazorD
 C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\Razor\Shared\BlogPosts.razor.g.cs
 C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\RazorDeclaration\Shared\BlogWindow.razor.g.cs
 C:\Users\sycho\OneDrive\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\Razor\Shared\BlogWindow.razor.g.cs
+C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.csprojAssemblyReference.cache
+C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\_framework\blazor.boot.json
-C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\Assets\BlueMonkeyLogo.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\BlueMonkeyLogo.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\addPost.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\addPostWhite.png
@@ -1465,6 +1466,7 @@ C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\selectBlog.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\selectBlogWhite.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\BlueApeUI.StaticWebAssets.xml
+C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\Assets\BlueMonkeyLogo.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\facebook-app-symbol.svg
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\iconfinder_plus_172525.png
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\Assets\Icons\instagram.svg
@@ -1904,8 +1906,6 @@ C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\_framew
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\_framework\icudt_EFIGS.dat
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\_framework\icudt_no_CJK.dat
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\wwwroot\_framework\dotnet.5.0.4.js
-C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.csprojAssemblyReference.cache
-C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.AssemblyInfoInputs.cache
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.AssemblyInfo.cs
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.csproj.CoreCompileInputs.cache
@@ -2180,3 +2180,5 @@ C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\ref\BlueApeUI.d
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\BlueApeUI.pdb
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\serviceworkers\wwwroot\service-worker.js
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\service-worker-assets.js
+C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\RazorDeclaration\Shared\GenerateButton.razor.g.cs
+C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\Razor\Shared\GenerateButton.razor.g.cs

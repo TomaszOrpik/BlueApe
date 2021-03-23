@@ -2,8 +2,21 @@
 @inject NavigationManager _navMan 
 
 <AuthorizeView>
-    <RadzenButton Text="Logout" Click="Logout" class="mr-2"></RadzenButton>
+    <RadzenButton ButtonType="Radzen.ButtonType.Submit" ButtonStyle="Radzen.ButtonStyle.Primary" Text="Logout" Click="Logout" class="mr-2 logoutBtn"></RadzenButton>
 </AuthorizeView>
+
+<style>
+    .logoutBtn {
+        position: absolute;
+        right: 10px;
+        top: 100px;
+        z-index: 300;
+        background-color: #2f2f2f !important;
+    }
+        .logoutBtn:hover {
+            background-color: lightgray !important;
+        }
+</style>
 
 @code {
     async Task Logout()

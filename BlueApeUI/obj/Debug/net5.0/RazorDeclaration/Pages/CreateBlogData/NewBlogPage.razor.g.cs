@@ -190,7 +190,7 @@ using Newtonsoft.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 119 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreateBlogData\NewBlogPage.razor"
+#line 121 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreateBlogData\NewBlogPage.razor"
        
     [Parameter]
     public string title { get; set; }

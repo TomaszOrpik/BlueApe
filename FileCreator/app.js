@@ -1,35 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { exec } = require('pkg');
-const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const cors = require('cors');
 const app = express();
 const jsonParser = bodyParser.json();
-const { RSA_NO_PADDING } = require('constants');
 const port = 9000;
 const fileupload = require('express-fileupload');
-
-
-///musi pobierać dane z mongoDB i generować ogromny plik budujący repo
-const createFileTheme = `
-const fs = require('fs');
-
-const content = '<div>Some test Content</div>';
-
-const pageData = \`function About() {
-    return \${content}
-  }
-  
-  export default About\`;
-
-
-fs.writeFileSync('output.js', pageData, function (err) {
-    if (err) throw err;
-    console.log('Saved!');
-});
-`;
-
+const AdmZip = require('adm-zip');
+const MongoClient = require('mongodb').MongoClient;
 
 app.use(cors());
 app.use(fileupload());
@@ -37,23 +15,93 @@ app.use(jsonParser);
 app.use( express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
-///add create file function that will draw whole Page from database Creator
 app.get('/', function (req, res) {
-  //in body goes collection and type of blog (static/dynamic)
-  res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/index.html')
 });
 
+///Endpoint to download json
+app.get('/config/:name', async function (req, res) {
+  let url;
+  if (app.settings.env === "development")
+     url = "mongodb://localhost:27017/";
+  else url = "connection string for prod env";
 
-app.get('/:name', async function (req, res) {
-  const name = `./${req.params.name}.js`;
-    fs.writeFileSync(name, createFileTheme);
-    await sleep(100);
-    await exec([name, '--windows']);
-    await sleep(100);
-    fs.unlinkSync(path.join(__dirname+'\\'+req.params.name+'-linux'));
-    fs.unlinkSync(path.join(__dirname+'\\'+req.params.name+'-macos'));
-    fs.unlinkSync(`./${req.params.name}.js`);
-    res.download(__dirname + `/${req.params.name}-win.exe`, req.params.name+'-win.exe');
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db('BlueApeDB');
+    const name = req.params.name.replace(/%20/g, " ");
+    dbo.collection(name).findOne({}, function(err, result) {
+      if (err) throw err;
+      const dir = `./Downloads/${name}`;
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+      fs.writeFileSync(`${dir}/BlogDocument.json`, JSON.stringify(result, null, 2));
+      res.download(`${dir}/BlogDocument.json`, function(error) {
+        console.log(error);
+      });
+      res.status(200);
+      db.close();
+    });
+  });
+});
+///Endpoint to download page with backend as json
+app.get('/staticPage/:name', async function (req, res) {
+  let url;
+  if (app.settings.env === "development")
+     url = "mongodb://localhost:27017/";
+  else url = "connection string for prod env";
+
+  const name = req.params.name.replace(/%20/g, " ");
+  const tempDir = `./${name}`;
+  if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
+  console.log('folder created');
+  /// move example folder
+  fs.copySync('./blogtemplate', `${tempDir}`, {overwrite: true, recursive: true, force: true}, function(err) {
+    if (err) console.log(err);
+    else console.log(tempDir, 'created');
+  });
+  sleep(1000);
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db('BlueApeDB');
+    dbo.collection(name).findOne({}, function(err, result) {
+      if (err) throw err;
+      fs.writeFileSync(`${tempDir}/BlogDocument.json`, JSON.stringify(result, null, 2));
+      console.log('json created');
+      /// add blogData file
+      fs.writeFileSync(`${tempDir}/pages/api/blogData.js`,
+      ` import blogDocument from '../../BlogDocument.json';
+
+       export default (req, res) => {
+         res.status(200).json(blogDocument)
+       }`, function (err) {
+         if (err) throw err;
+       })
+      /// pack to zip
+      const targetDir = `./Downloads/${name}`;
+      if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir);
+       const file = new AdmZip();
+       file.addLocalFolder(`${tempDir}`, name);
+       fs.writeFileSync(`${targetDir}/${name}.zip`, file.toBuffer());
+
+       fs.rmSync(tempDir, { recursive: true, force: true });
+      res.download(`${targetDir}/${name}.zip`, function (error) {
+        console.log(error);
+      });
+      res.status(200);
+      db.close();
+    });
+  });
+});
+///Endpoint to download page with backend from mongo DB
+app.get('/dynamicPage/:name', async function (req, res) {
+  ///no need for json so i don't need to connect with mongo db
+  ///move example folder
+  /// add blogData file
+  /// pack to zip
+  /// move zip to donwloads
+  //// download folder
+  /// return
+
 });
 ///End point to create logo image on server
 app.post('/saveImage', async function (req, res) {
@@ -103,7 +151,7 @@ app.delete('/deleteJpgImage/:name', async function (req, res) {
 });
 
 app.listen(port, () => console.log(`Server started at port ${port}`));
-
+//helpers
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }

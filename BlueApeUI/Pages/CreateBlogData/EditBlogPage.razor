@@ -9,11 +9,15 @@
 
 @attribute [Authorize]
 
+<UserStatus></UserStatus>
+
+<GenerateButton blogData="data"></GenerateButton>
+
 <div class="navigation">
     <NavMenu Title="@title" />
 </div>
 
-<div class="moveRight">
+<div class="moveRight top">
     <BlogNav model="@blogModel" scale="4" activeButtons="@true"></BlogNav>
 </div>
 <div class="container">
@@ -35,8 +39,8 @@
     </div>
 
 </div>
-<div class="moveRight">
-    <BlogFooter></BlogFooter>
+<div class="moveRight footer">
+    <BlogFooter scale="4"></BlogFooter>
 </div>
 
 <style>
@@ -83,12 +87,16 @@
         font-size: 26px;
         cursor: pointer;
     }
-
+    .moveRight.top {
+        top: 0;
+    }
     .moveRight {
         position: absolute;
-        top: 0;
         left: 60px;
         width: calc(100% - 60px);
+    }
+    .moveRight.footer {
+        bottom: 0;
     }
 </style>
 
@@ -101,6 +109,7 @@
     public string category { get; set; }
 
     private string _category = "all";
+    private BlogData data;
 
     private BlogSettings blogModel = new BlogSettings("", "", "", "", "", "",
         new List<string>
@@ -123,11 +132,9 @@
             var result = await _blogsRepo.getBlogData(title);
             if (result.isSuccess)
             {
-                BlogData blogData = JsonConvert.DeserializeObject<BlogData>
-                    (result.content);
-                List<string>
-                    currentPages = new List<string>
-                        ();
+                BlogData blogData = JsonConvert.DeserializeObject<BlogData>(result.content);
+                data = blogData;
+                List<string> currentPages = new List<string>();
                 foreach (PageData page in blogData.BlogDocument.Pages) currentPages.Add(page.Title);
                 blogModel = new BlogSettings
                 (

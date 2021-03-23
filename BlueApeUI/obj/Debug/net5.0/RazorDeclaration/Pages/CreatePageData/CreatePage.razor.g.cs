@@ -186,7 +186,7 @@ using Blazored.TextEditor;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 159 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
+#line 161 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreatePageData\CreatePage.razor"
        
     [Parameter]
     public string Title { get; set; }

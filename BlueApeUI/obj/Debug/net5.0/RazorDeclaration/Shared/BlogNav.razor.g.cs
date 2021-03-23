@@ -174,7 +174,7 @@ using BlueApeUI.Utilities;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 178 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogNav.razor"
+#line 181 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogNav.razor"
        
     [Parameter]
     public BlogSettings model { get; set; }

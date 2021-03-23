@@ -3,7 +3,7 @@
 <div class=@("topBar"+classUnique)>
     <div class=@("leftSide"+classUnique)>
         <div class=@("logo"+classUnique)>
-            <img src=@model.logoUrl height=@(scale*17) />
+            <img src=@model.logoUrl height=@(scale*12) />
         </div>
         @for (int j = 0; j < model.pages.Count() && j <= 7; j++)
         {
@@ -125,8 +125,11 @@
     }
     .logo@(classUnique) {
         width: auto;
-        height: @(Convert.ToString(scale * 17)+"px");
+        height: @(Convert.ToString(scale * 16)+"px");
         cursor: pointer;
+    }
+    .logo@(classUnique) > img {
+        vertical-align: text-top !important;
     }
     .logo@(classUnique):hover {
         background: rgb(168,168,168);

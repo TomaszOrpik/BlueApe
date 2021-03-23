@@ -191,7 +191,7 @@ using Newtonsoft.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 95 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreateBlogData\EditBlogPage.razor"
+#line 103 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\CreateBlogData\EditBlogPage.razor"
        
     [Parameter]
     public string title { get; set; }
@@ -201,6 +201,7 @@ using Newtonsoft.Json;
     public string category { get; set; }
 
     private string _category = "all";
+    private BlogData data;
 
     private BlogSettings blogModel = new BlogSettings("", "", "", "", "", "",
         new List<string>
@@ -223,11 +224,9 @@ using Newtonsoft.Json;
             var result = await _blogsRepo.getBlogData(title);
             if (result.isSuccess)
             {
-                BlogData blogData = JsonConvert.DeserializeObject<BlogData>
-                    (result.content);
-                List<string>
-                    currentPages = new List<string>
-                        ();
+                BlogData blogData = JsonConvert.DeserializeObject<BlogData>(result.content);
+                data = blogData;
+                List<string> currentPages = new List<string>();
                 foreach (PageData page in blogData.BlogDocument.Pages) currentPages.Add(page.Title);
                 blogModel = new BlogSettings
                 (

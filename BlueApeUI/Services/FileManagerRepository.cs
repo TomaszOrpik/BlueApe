@@ -55,6 +55,10 @@ namespace BlueApeUI.Services
             var response = await _client.DeleteAsync($"{_client.BaseAddress}deleteJpgImage/{fileName}");
             return ResponseUtilities.ResponseValidation(response.StatusCode, String.Empty);
         }
+        //get endpoint
+        public string GenerateUrl() => _client.BaseAddress.ToString();
+
+
     }
     public class LogoUrl
     {

@@ -167,14 +167,14 @@ using BlueApeUI.Utilities;
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
+#line 6 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
 using Newtonsoft.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
+#line 8 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
            [Authorize]
 
 #line default
@@ -189,13 +189,13 @@ using Newtonsoft.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 76 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
+#line 94 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
        
 
     [CascadingParameter]
     public Task<AuthenticationState> authenticationStateTask { get; set; }
 
-    private List<string> blogs = new List<string>();
+    private Dictionary<BlogSettings, PageData[]> blogs = new Dictionary<BlogSettings, PageData[]>();
 
     private void NavigateToNewEditor()
     {
@@ -216,21 +216,35 @@ using Newtonsoft.Json;
         if (response.isSuccess)
         {
             UserBlogsResponse blogsResponse = JsonConvert.DeserializeObject<UserBlogsResponse>(response.content);
-            blogs = blogsResponse.blogNames.ToList();
+            string[] blogs = blogsResponse.blogNames;
+            foreach(string blog in blogs)
+            {
+                var blogResult = await _blogsRepo.getBlogData(blog);
+                if (blogResult.isSuccess)
+                {
+
+                    BlogData data = JsonConvert.DeserializeObject<BlogData>(blogResult.content);
+                    PageData[] posts = data.BlogDocument.Posts;
+                    List<string> pageTitles = new List<string>();
+                    foreach (PageData page in data.BlogDocument.Pages)
+                        pageTitles.Add(page.Title);
+                    BlogSettings settings = new BlogSettings(
+                        data.BlogDocument.BlogDetails.Title,
+                        data.BlogDocument.BlogDetails.LogoUrl,
+                        data.BlogDocument.BlogDetails.Description,
+                        data.BlogDocument.BlogDetails.PrimaryColor,
+                        data.BlogDocument.BlogDetails.SecondaryColor,
+                        data.BlogDocument.BlogDetails.BackgroundColor,
+                        data.BlogDocument.Categories.ToList(),
+                        pageTitles,
+                        data.BlogDocument.BlogDetails.FacebookLink,
+                        data.BlogDocument.BlogDetails.InstagramLink,
+                        data.BlogDocument.BlogDetails.TwitterLink
+                    );
+                    this.blogs.Add(settings, posts);
+                }
+            }
         }
-        ///get blogs from userName and display with screen as background
-    }
-
-
-    /// <summary>
-    /// to delete when finished
-    /// </summary>
-    string response = "Null";
-    async Task GetFile() ///download file test
-    {
-        ///if development connect to local host if prod to smarthost
-        string url = "http://sycho141.smarthost.pl/testName";
-        await jsRuntime.InvokeAsync<object>("open", url, "_blank");
     }
 
 #line default
@@ -238,8 +252,6 @@ using Newtonsoft.Json;
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IBlogsManagerRepository _blogsRepo { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager _navMan { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime jsRuntime { get; set; }
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -174,7 +174,7 @@ using BlueApeUI.Utilities;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 8 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\UserStatus.razor"
+#line 21 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\UserStatus.razor"
        
     async Task Logout()
     {
