@@ -12,10 +12,10 @@
                     </div>
                     <div class="right col-6">
                         <a class=@("blackFont"+uniqueClass) href=@($"/post-editor/{_title}/{_posts[p].Title}")>
-                            <h1 class=@("bigString"+uniqueClass)>@_posts[p].Title</h1>
+                            <p class=@("bigString"+uniqueClass)>@_posts[p].Title</p>
                         </a>
-                        <span class=@("postSpan"+uniqueClass)>@_posts[p].Intro</span>
-                        <h3 class=@("smallString"+uniqueClass)>Posted @_posts[p].Date</h3>
+                        <p class=@("postSpan"+uniqueClass)>@_posts[p].Intro</p>
+                        <p class=@("smallString"+uniqueClass)>Posted @_posts[p].Date</p>
                     </div>
                 </div>
             </div>
@@ -28,9 +28,9 @@
                             <img style="width: 100%" src="@_posts[p].ImageUrl" />
                     </div>
                     <div class="right col-6">
-                        <h1 class=@("bigString"+uniqueClass)>@_posts[p].Title</h1>
-                        <span class=@("postSpan"+uniqueClass)>@_posts[p].Intro</span>
-                        <h3 class=@("smallString"+uniqueClass)>Posted @_posts[p].Date</h3>
+                        <p class=@("bigString"+uniqueClass)>@_posts[p].Title</p>
+                        <p class=@("postSpan"+uniqueClass)>@_posts[p].Intro</p>
+                        <p class=@("smallString"+uniqueClass)>Posted @_posts[p].Date</p>
                     </div>
                 </div>
             </div>
@@ -42,13 +42,15 @@
 
 <style>
     .bigString@(uniqueClass) {
-        font-size: @((_scale*10).ToString()+"px");
+        font-size: @((_scale*10).ToString()+"px !important");
+        margin-bottom: 0;
     }
     .postSpan@(uniqueClass) {
-        font-size: @((_scale*7).ToString()+"px")
+        font-size: @((_scale*7).ToString()+ "px !important");
+        margin-bottom: 0;
     }
     .smallString@(uniqueClass) {
-        font-size: @((_scale*6).ToString()+"px")
+        font-size: @((_scale*6).ToString()+ "px !important");
     }
     .containerBody@(uniqueClass) {
         width: 100%;

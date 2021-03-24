@@ -189,7 +189,7 @@ using Newtonsoft.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 94 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
+#line 107 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Pages\Index.razor"
        
 
     [CascadingParameter]

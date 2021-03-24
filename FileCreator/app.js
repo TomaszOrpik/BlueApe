@@ -81,10 +81,10 @@ app.get('/staticPage/:name', async function (req, res) {
       if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir);
        const file = new AdmZip();
        file.addLocalFolder(`${tempDir}`, name);
-       fs.writeFileSync(`${targetDir}/${name}.zip`, file.toBuffer());
+       fs.writeFileSync(`${targetDir}/${name}-static.zip`, file.toBuffer());
 
        fs.rmSync(tempDir, { recursive: true, force: true });
-      res.download(`${targetDir}/${name}.zip`, function (error) {
+      res.download(`${targetDir}/${name}-static.zip`, function (error) {
         console.log(error);
       });
       res.status(200);
@@ -94,14 +94,53 @@ app.get('/staticPage/:name', async function (req, res) {
 });
 ///Endpoint to download page with backend from mongo DB
 app.get('/dynamicPage/:name', async function (req, res) {
-  ///no need for json so i don't need to connect with mongo db
-  ///move example folder
-  /// add blogData file
-  /// pack to zip
-  /// move zip to donwloads
-  //// download folder
-  /// return
+  let url;
+  if (app.settings.env === "development")
+    url = "mongodb://localhost:27017/";
+  else url = "connection string for prod env";
 
+  const name = req.params.name.replace(/%20/g, " ");
+  const tempDir = `./${name}`;
+  if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
+  console.log('folder created');
+  /// move example folder
+  fs.copySync('./blogtemplate', `${tempDir}`, { overwrite: true, recursive: true, force: true }, function (err) {
+    if (err) console.log(err);
+    else console.log(tempDir, 'created');
+  });
+  sleep(1000);
+
+  /// add blogData file
+  fs.writeFileSync(`${tempDir}/pages/api/blogData.js`,
+    `const MongoClient = require('mongodb').MongoClient;
+
+      export default (req, res) => {
+        const url = "${url}";
+        const dbName = 'BlueApeDB'
+        const collectionName = '${name}';
+        MongoClient.connect(url, function(err, db) {
+          if (err) throw err;
+          var dbo = db.db(dbName);
+          dbo.collection(collectionName).findOne({}, function(err, result) {
+            if (err) throw err;
+            res.status(200).json(result);
+          })
+        })
+      }`, function (err) {
+    if (err) throw err;
+  })
+  /// pack to zip
+  const targetDir = `./Downloads/${name}`;
+  if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir);
+  const file = new AdmZip();
+  file.addLocalFolder(`${tempDir}`, name);
+  fs.writeFileSync(`${targetDir}/${name}-dynamic.zip`, file.toBuffer());
+
+  fs.rmSync(tempDir, { recursive: true, force: true });
+  res.download(`${targetDir}/${name}-dynamic.zip`, function (error) {
+    console.log(error);
+  });
+  res.status(200);
 });
 ///End point to create logo image on server
 app.post('/saveImage', async function (req, res) {

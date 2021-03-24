@@ -174,7 +174,7 @@ using BlueApeUI.Utilities;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 75 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogPosts.razor"
+#line 77 "C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\Shared\BlogPosts.razor"
        
     [Parameter]
     public PageData[] posts { get; set; }

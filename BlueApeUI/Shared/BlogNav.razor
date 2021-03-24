@@ -49,7 +49,7 @@
 
 @if (!showTitle)
 {
-<style>
+    <style>
         .title@(classUnique) {
             display: none !important;
         }
@@ -57,7 +57,17 @@
         .categoryContainer@(classUnique) {
             top: 0 !important;
         }
-</style>
+    </style>
+}
+
+@if (scale == 1)
+{
+    <style>
+        .categoryContainer@(classUnique)
+        {
+            display: none !important;
+        }
+    </style>
 }
 
 <style>

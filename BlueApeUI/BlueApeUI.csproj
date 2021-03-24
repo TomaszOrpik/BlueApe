@@ -4,6 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <ApplicationIcon>BlueMonkeyLogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -84,6 +85,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\BlueMonkeyLogo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\BlueMonkeyLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

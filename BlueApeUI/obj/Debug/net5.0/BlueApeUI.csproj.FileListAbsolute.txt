@@ -2182,3 +2182,4 @@ C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\serviceworkers\
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\service-worker-assets.js
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\RazorDeclaration\Shared\GenerateButton.razor.g.cs
 C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\obj\Debug\net5.0\Razor\Shared\GenerateButton.razor.g.cs
+C:\Users\sycho\Desktop\GitHub\BlueApe\BlueApeUI\bin\Debug\net5.0\Assets\BlueMonkeyLogo.ico

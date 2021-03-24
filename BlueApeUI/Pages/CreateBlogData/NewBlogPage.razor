@@ -265,20 +265,17 @@
         else
         {
             //existing
-
-            foreach (string pageName in model.pages)
-            {
-                int index = pages.FindIndex(page => page.Title == pageName);
-                if (index == 0) pages.Add(new PageData
+            List<PageData> pages = new List<PageData>();
+            foreach (string page in model.pages)
+                pages.Add(new PageData
                 {
-                    Title = pageName,
+                    Title = page,
                     ImageUrl = "./Assets/bg-5example.jpg",
                     Intro = "Default Page introduction",
                     Content = Utilities.Placeholders.dummyText,
                     Categories = new List<string>() { "Page" }.ToArray(),
                     Date = DateTime.Today.ToString("dd/mm/yyyy")
                 });
-            }
             BlogDocument document = new BlogDocument
             {
                 BlogDetails = details,

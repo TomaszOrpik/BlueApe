@@ -36,6 +36,14 @@
 </div>
 
 <style>
+    .left {
+        padding: 0;
+        padding-right: 5px;
+    }
+    .right {
+        padding: 0;
+    }
+
     .logoutBtn {
         top: 10px !important;
     }
@@ -88,7 +96,12 @@
         position: relative;
         height: 300px;
         overflow: hidden;
+        border: 1px solid black;
+        cursor: pointer;
     }
+        .bodySquare.blogWindow:hover {
+            box-shadow: 0 0 11px dodgerblue;
+        }
 </style>
 
 @code {
