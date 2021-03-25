@@ -11,8 +11,8 @@ BlueApe it's fullstack application which main functionality is creating custom b
 [1.2 Technologies](#12-technologies)  
 [1.3 Endpoints](#13-endpoints)  
 [1.4 Setup](#14-setup)  
-**[2 File Creator](#2-file_creator)**  
-[2.1 General Info](#21-general_info)  
+**[2 File Creator](#2-file-creator)**  
+[2.1 General Info](#21-general-info)  
 [2.2 Technologies](#22-technologies)  
 [2.3 Endpoints](#23-endpoints)  
 [2.4 Setup](#24-setup)  
@@ -27,7 +27,7 @@ BlueApe it's fullstack application which main functionality is creating custom b
 [4.3 API](#43-api)  
 [4.4 Setup](#44-setup)  
 **[5 Others](#5-others)**  
-[5.1 Report Bug and improves](#51-report-bug-and-improvments)  
+[5.1 Report Bug and improvments](#51-report-bug-and-improvments)  
 [5.2 License](#52-license)  
 [5.3 Contact](#53-contact)  
 
@@ -46,7 +46,7 @@ sdgsdgsd
 dfggdfgdf
 ### 1.4 Setup
 dfgdfghfd
-# 2 FileCreator
+# 2 File Creator
 dfhhfdhd
 ### 2.1 General Info
 fdhghdf
@@ -77,10 +77,12 @@ gkhgghk
 ### 4.4 Setup
 gffgh
 # 5 Others
-jgfhjgh
-### 5.1 Report Bug and improves
-jgfjfg
+
+### 5.1 Report Bug and improvments
+You can report encountered bugs or send ideas for improvement [here](https://github.com/TomaszOrpik/BlueApe/issues)
+
 ### 5.2 License
-fgjfgj
+Application was uploaded under GENERAL PUBLIC LICENSE for more information [check license file](https://github.com/TomaszOrpik/BlueApe/blob/main/LICENSE) link to license
+
 ### 5.3 Contact
-fgjgjfgjf
+Feel free to [Contact me!](https://github.com/TomaszOrpik)
