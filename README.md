@@ -2,6 +2,7 @@
 Web assembly based website blog template editor
 
 # Introduction
+
 BlueApe it's fullstack application which main functionality is creating custom blogs by application users. App is scripted mainly in C# and JavaScript languages. User thanks to BlueApe Blog Generator can create fully functional blogs with own database, subpages and styling. Pages generated like this can be even deployed and later edited through editor or custom coded in Javascript. 
 
 ### Table of contents
@@ -31,31 +32,95 @@ BlueApe it's fullstack application which main functionality is creating custom b
 [5.2 License](#52-license)  
 [5.3 Contact](#53-contact)  
 
-## 1.1 Hello World
-Create a link to it this way:
-
-[Link](#11-hello-world)
 
 # 1 BlueApe API
-fsafsafa
+
 ### 1.1 General Info
-sdgsdgds
+
+Written in C# Api created to manage users blogs and accounts. Using ASP.NET WebAPI technology, api connects to mongo database, where it store and pass all data send from the UI. Using Entity framework and Identity framework api verifies users trying to access front end application based on they existence in database and logged in time with Json Web Token technology.
+
 ### 1.2 Technologies
-sdgsdgsd
+
+Api is programmed in .net Core 5, ASP.NET WebAPI technology and C# language. Main libraries and frameworks used by application:
+* Microsoft.AspNetCore.Identity
+* Microsoft.AspNetCore.Identity.MongoDB
+* Microsoft.AspNetCore.Authentication.JwtBearer
+* Microsoft.EntityFrameworkCore
+* Microsoft.OpenApi
+* System.IO
+* System.Linq
+* System.Text
+* System.Reflection
+
 ### 1.3 Endpoints
-dfggdfgdf
+
+Endpoints utilized by application:
+| resource      | requirements        |result        |
+|:--------------|:--------------------|:-------------|
+| Get `api/v1/Blogs/LookForBlog/:name` | name | Returns true if blog exist in database, otherwise false |
+| Get `api/v1/Blogs/GetUserBlogs:/name` | User Name | Returns from database all blogs created by passed user |
+| Post `api/v1/Blogs/CreateBlog` | BlogDocument | Creates in database new collection named after passed blog data, with all passed values and in users collection new user, with read/write access for this blog |
+| Get `api/v1/Blogs/GetBlogData/:name` | name | Gets from database data of blog with passed name |
+| Put `api/v1/Blogs/UpdateBlogData` | BlogDocument | Updates passed blog document in collection |
+| Delete `api/v1/Blogs/DeleteBlog/:name` | name | Deletes from database blog with specific name |
+| Get `api/v1/Blogs/LookForPost/:blogName/:postName` | Blog Name, Post Name | Looks in blog data with specific name, pointed post, returns true if exist, otherwise false |
+| Get `api/v1/Blogs/getPostData/:blogName/:postName` | Blog name, Post name | Returns from pointed blog collection data of specific post |
+| Get `api/v1/Blogs/GetPageData/:blogName/:pageName` | Blog name, Page name | Returns from pointed blog collection data of specific page |
+| Post `api/v1/Blogs/AddPostData` | BlogDocument | Updates passed blog document in collection |
+| Post `api/v1/Blogs/AddPageData` | BlogDocument | Updates passed blog document in collection |
+| Put `api/v1/Blogs/UpdatePostData` | BlogDocument | Updates passed blog document in collection |
+| Put `api/v1/Blogs/UpdatePageData` | BlogDocument | Updates passed blog document in collection |
+| Delete `api/v1/Blogs/DeletePostData/:blogName/:postName` | Blog name, Post name | Removes post with specific name from the pointed blog |
+| Delete `api/v1/Blogs/DeletePageData/:blogName/:pageName` | Blog name, Page name | Removes page with specific name from the pointed blog |
+| Get `api/v1/Users/UserData` | JwtToken | Authorize user |
+| Post `api/v1/Users/Register` | userModel | Adds passed user to database |
+| Post `api/v1/Users/Login` | userModel | Verify if passed user exist in database, then verify token, then return ok |
+
 ### 1.4 Setup
-dfgdfghfd
+
+To work correctly app requires [.net Core 5](https://dotnet.microsoft.com/download/dotnet/5.0) and [Visual Studio 2019](https://visualstudio.microsoft.com/pl/downloads/)
+* Download repository
+* Open BlueApe solution file
+* Debug or Build in Visual Studio
+
 # 2 File Creator
-dfhhfdhd
+
 ### 2.1 General Info
-fdhghdf
+
+Node.js + Express.js API utilize to manage data directly on server. Main function of app is to generate endpoints, to easy manage images and generated blog data. Thanks to elastic files management functions of node.js - application can save files posted from front-end app on server, sending direct urls to files and manage blog data writing and downloading.
+
 ### 2.2 Technologies
-fdghfd
+
+Api is programmed in node.js + express.js frameworks with JavaScript language. Frameworks and libraries used in api:
+* fs-extra
+* body-parser
+* express-fileupload
+* cors
+* adm-zip
+* mongodb
+* nodemon
+
 ### 2.3 Endpoints
-gjfjgffgj
+
+Endpoints utilized by application:
+| resource      | requirements        |result        |
+|:--------------|:--------------------|:-------------|
+| Get `/` | None | Display index page |
+| Get `/config/:name` | Blog name | Generates json file with passed name blog data stored in database |
+| Get `/staticPage/:name` | Blog name | Generates blog repository in next.js with json file in place of database connection |
+| Get `/dynamicPage/:name` | Blog name | Generates blog repository in next.js with api getting blog data from database |
+| Post `/saveImage` | File name, base64 string | Saves base64 string on server end returns link to generated png image |
+| Delete `/deleteImage/:name` | Image name | Deletes from server png image with passed name |
+| Post `/saveJpgImage` | File name, Base64 string | Saves base64 string on server end returns link to generated jpg image |
+| Delete `/deleteJpgImage/:name` | image name | Deletes from server jpg image with passed name |
+
 ### 2.4 Setup
-dfdf
+
+To work correctly App requires node.js installed:
+* Download repository
+* Run `npm install`
+* Start server with `npm run start`
+
 # 3 BlueApe UI
 fgfgfgj
 ### 3.1 General Info
