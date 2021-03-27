@@ -14,22 +14,26 @@ BlueApe it's fullstack application which main functionality is creating custom b
 [1.2 Technologies](#12-technologies)  
 [1.3 Endpoints](#13-endpoints)  
 [1.4 Setup](#14-setup)  
+
 **[2 File Creator](#2-file-creator)**  
 [2.1 General Info](#21-general-info)  
 [2.2 Technologies](#22-technologies)  
 [2.3 Endpoints](#23-endpoints)  
 [2.4 Setup](#24-setup)  
+
 **[3 BlueApe UI](#3-blueape-ui)**  
 [3.1 General Info](#31-general-info)  
 [3.2 Technologies](#32-technologies)  
 [3.3 Features](#33-features)  
 [3.4 Setup](#34-setup)  
+
 **[4 BlueApe Template](#4-blueape-template)**  
 [4.1 General Info](#41-general-info)  
 [4.2 Technologies](#42-technologies)  
 [4.3 API](#43-api)  
 [4.4 Setup](#44-setup)  
 [4.5 Deployment](#45-deployment)  
+
 **[5 Others](#5-others)**  
 [5.1 Report Bug and improvments](#51-report-bug-and-improvments)  
 [5.2 License](#52-license)  
