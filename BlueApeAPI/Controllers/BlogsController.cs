@@ -234,7 +234,7 @@ namespace BlueApeAPI.Controllers
             }
         }
         /// <summary>
-        /// Update post for specific blog
+        /// Add post for specific blog
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -255,6 +255,28 @@ namespace BlueApeAPI.Controllers
             }
         }
         /// <summary>
+        /// Add page for specific blog
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult AddPageData([FromBody] BlogData data)
+        {
+            try
+            {
+                _blogDataService.AddPage(data.BlogDocument.BlogDetails.Title,
+                    data.BlogDocument.Pages[data.BlogDocument.Pages.Length - 1]);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"Request ended with error: {e.Message}");
+                return BadRequest(e.Message);
+            }
+        }
+        /// <summary>
         /// Update passed post in specific blog
         /// </summary>
         /// <param name="data"></param>
@@ -267,6 +289,27 @@ namespace BlueApeAPI.Controllers
             try
             {
                 _blogDataService.UpdatePost(data);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Log.Warning($"Request ended with error: {e.Message}");
+                return BadRequest(e.Message);
+            }
+        }
+        /// <summary>
+        /// Update passed page in specific blog
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdatePageData([FromBody] BlogData data)
+        {
+            try
+            {
+                _blogDataService.UpdatePage(data);
                 return NoContent();
             }
             catch (Exception e)

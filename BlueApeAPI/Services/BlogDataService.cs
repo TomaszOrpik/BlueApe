@@ -92,8 +92,27 @@ namespace BlueApeAPI.Services
             var update = Builders<BlogData>.Update.Set("BlogDocument", document);
             _database.GetCollection<BlogData>(blogName).UpdateOne(data => true, update);
         }
+        // add new page
+        public void AddPage(string blogName, PageData page)
+        {
+            BlogDocument document = _database.GetCollection<BlogGetData>(blogName)
+                .Find(data => true).FirstOrDefault().BlogDocument;
+            PageData[] pages = document.Pages;
+            List<PageData> listPages = pages.ToList();
+            listPages.Add(page);
+            PageData[] newPosts = listPages.ToArray();
+            document.Pages = newPosts;
+            var update = Builders<BlogData>.Update.Set("BlogDocument", document);
+            _database.GetCollection<BlogData>(blogName).UpdateOne(data => true, update);
+        }
         // update existing post
         public void UpdatePost(BlogData data)
+        {
+            var update = Builders<BlogData>.Update.Set("BlogDocument", data.BlogDocument);
+            _database.GetCollection<BlogData>(data.BlogDocument.BlogDetails.Title).UpdateOne(data => true, update);
+        }
+        // update existing page
+        public void UpdatePage(BlogData data)
         {
             var update = Builders<BlogData>.Update.Set("BlogDocument", data.BlogDocument);
             _database.GetCollection<BlogData>(data.BlogDocument.BlogDetails.Title).UpdateOne(data => true, update);

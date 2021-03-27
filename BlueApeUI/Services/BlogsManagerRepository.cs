@@ -83,11 +83,25 @@ namespace BlueApeUI.Services
             var response = await _client.PostAsync($"{_client.BaseAddress}api/v1/Blogs/AddPostData", content);
             return ResponseUtilities.ResponseValidation(response.StatusCode, string.Empty);
         }
+        public async Task<ResponseModel> addPage(BlogData body)
+        {
+            string json = JsonConvert.SerializeObject(body);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync($"{_client.BaseAddress}api/v1/Blogs/AddPageData", content);
+            return ResponseUtilities.ResponseValidation(response.StatusCode, string.Empty);
+        }
         public async Task<ResponseModel> updatePost(BlogData body)
         {
             string json = JsonConvert.SerializeObject(body);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _client.PutAsync($"{_client.BaseAddress}api/v1/Blogs/UpdatePostData", content);
+            return ResponseUtilities.ResponseValidation(response.StatusCode, string.Empty);
+        }
+        public async Task<ResponseModel> updatePage(BlogData body)
+        {
+            string json = JsonConvert.SerializeObject(body);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await _client.PutAsync($"{_client.BaseAddress}api/v1/Blogs/UpdatePageData", content);
             return ResponseUtilities.ResponseValidation(response.StatusCode, string.Empty);
         }
         public async Task<ResponseModel> deletePost(string blogName, string postName)
