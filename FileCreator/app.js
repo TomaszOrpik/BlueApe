@@ -3,7 +3,11 @@ const bodyParser = require('body-parser');
 const fs = require('fs-extra');
 const cors = require('cors');
 const app = express();
-const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json({
+  limit:'50mb',
+  extended: true
+  }
+);
 const port = 9000;
 const fileupload = require('express-fileupload');
 const AdmZip = require('adm-zip');
@@ -169,7 +173,7 @@ app.delete('/deleteImage/:name', async function (req, res) {
 app.post('/saveJpgImage', async function (req, res) {
   const fileName = req.body.fileName;
   const base64DataRaw = req.body.base64File;
-  base64Data = base64DataRaw.replace(/^data:image\/png;base64,/, "");
+  base64Data = base64DataRaw.replace(/^data:image\/jpg;base64,/, "");
 
   fs.writeFile(`images/${fileName}`, base64Data, 'base64', function(err) {
   if (err) console.log(err);
